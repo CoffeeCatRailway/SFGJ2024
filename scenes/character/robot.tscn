@@ -1,0 +1,197 @@
+[gd_scene load_steps=21 format=3 uid="uid://bb1vnw8wd6x4y"]
+
+[ext_resource type="Script" path="res://scripts/character/enemy/RobotMoveComponent.gd" id="1_2l8uu"]
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_vtly7"]
+[ext_resource type="Script" path="res://scripts/character/enemy/Robot.gd" id="1_wnats"]
+[ext_resource type="Script" path="res://scripts/stateMachine/StateMachine.gd" id="2_dkkwy"]
+[ext_resource type="Script" path="res://scripts/stateMachine/states/StateIdle.gd" id="3_iefyn"]
+[ext_resource type="Script" path="res://scripts/stateMachine/states/StateWalk.gd" id="4_3uuwe"]
+[ext_resource type="Script" path="res://scripts/character/enemy/RobotStateGunIdle.gd" id="6_8uac2"]
+[ext_resource type="Script" path="res://scripts/stateMachine/states/gun/StateGunFire.gd" id="7_2d083"]
+[ext_resource type="Script" path="res://scripts/stateMachine/states/StateDeath.gd" id="7_fow78"]
+[ext_resource type="PackedScene" uid="uid://7p38obrwep6u" path="res://scenes/elements/bullet.tscn" id="8_5xox3"]
+[ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="10_vfjg1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgqa6"]
+radius = 2.0
+height = 12.0
+
+[sub_resource type="Animation" id="Animation_knswg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(5, 12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1e6ys"]
+resource_name = "idle"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(5, 11), Vector2i(5, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_amtdy"]
+resource_name = "walk"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(5, 10), Vector2i(5, 11), Vector2i(5, 12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_25xmp"]
+_data = {
+"RESET": SubResource("Animation_knswg"),
+"idle": SubResource("Animation_1e6ys"),
+"walk": SubResource("Animation_amtdy")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1t1d"]
+atlas = ExtResource("1_vtly7")
+region = Rect2(152, 86, 13, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gkp2"]
+size = Vector2(12, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1n34"]
+atlas = ExtResource("1_vtly7")
+region = Rect2(97, 161, 14, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afanb"]
+atlas = ExtResource("1_vtly7")
+region = Rect2(97, 163, 14, 1)
+
+[node name="Robot" type="CharacterBody2D"]
+script = ExtResource("1_wnats")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("10_vfjg1")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("robot")]
+script = ExtResource("1_2l8uu")
+robot = NodePath("..")
+speed = 50.0
+
+[node name="MoveStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("2_dkkwy")
+initialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MoveStateMachine" node_paths=PackedStringArray("walkState", "deathState", "healthComponent")]
+script = ExtResource("3_iefyn")
+walkState = NodePath("../Walk")
+deathState = NodePath("../Death")
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="Walk" type="Node" parent="MoveStateMachine" node_paths=PackedStringArray("idleState", "deathState", "healthComponent")]
+script = ExtResource("4_3uuwe")
+idleState = NodePath("../Idle")
+deathState = NodePath("../Death")
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="Death" type="Node" parent="MoveStateMachine"]
+script = ExtResource("7_fow78")
+
+[node name="GunStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("2_dkkwy")
+initialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="GunStateMachine" node_paths=PackedStringArray("robot", "fireState", "marker", "timer")]
+script = ExtResource("6_8uac2")
+robot = NodePath("../..")
+fireState = NodePath("../Fire")
+marker = NodePath("../../GunSprite/Marker2D")
+timer = NodePath("../../Timer")
+
+[node name="Fire" type="Node" parent="GunStateMachine" node_paths=PackedStringArray("idleState", "marker")]
+script = ExtResource("7_2d083")
+idleState = NodePath("../Idle")
+marker = NodePath("../../GunSprite/Marker2D")
+bulletScene = ExtResource("8_5xox3")
+isPurple = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wgqa6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_vtly7")
+offset = Vector2(0, -7)
+hframes = 32
+vframes = 15
+frame = 389
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_25xmp")
+}
+autoplay = "idle"
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -3)
+texture = SubResource("AtlasTexture_t1t1d")
+offset = Vector2(7, 0)
+
+[node name="Marker2D" type="Marker2D" parent="GunSprite"]
+position = Vector2(14, -1)
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_5gkp2")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(100, 0)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -7.0
+offset_top = -15.0
+offset_right = 7.0
+offset_bottom = -14.0
+texture_under = SubResource("AtlasTexture_u1n34")
+texture_progress = SubResource("AtlasTexture_afanb")

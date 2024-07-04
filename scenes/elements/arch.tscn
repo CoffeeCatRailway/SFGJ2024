@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cman2uuyyu3wu"]
+
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_68i1v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu8e1"]
+atlas = ExtResource("1_68i1v")
+region = Rect2(176, 12, 32, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndf6w"]
+size = Vector2(5, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wdti"]
+size = Vector2(5, 16)
+
+[node name="Arch" type="Sprite2D"]
+y_sort_enabled = true
+position = Vector2(8, 8)
+texture = SubResource("AtlasTexture_iu8e1")
+offset = Vector2(0, -10)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0.5, -4.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(13, -3.5)
+shape = SubResource("RectangleShape2D_ndf6w")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-14, -3.5)
+shape = SubResource("RectangleShape2D_6wdti")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch3oqwysdc2ka"]
+
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_prxyj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg2uu"]
+atlas = ExtResource("1_prxyj")
+region = Rect2(213, 5, 5, 43)
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(0, 23.5)
+texture = SubResource("AtlasTexture_cg2uu")
+offset = Vector2(0, -21)
