@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="SFGJ2024"
+config/name="SausageFest GameJam 2024"
+config/version="0.0.1.2"
 run/main_scene="res://scenes/levels/level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
