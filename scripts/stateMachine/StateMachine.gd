@@ -23,11 +23,11 @@ func changeState(newState: State) -> void:
 	currentState.enter()
 
 func update(delta: float) -> void:
-	var newState = currentState.update(delta)
+	var newState: State = currentState.update(delta)
 	if newState:
 		changeState(newState)
 
 func updatePhysics(delta: float) -> void:
-	var newState = currentState.updatePhysics(delta)
+	var newState: State = currentState.updatePhysics(delta)
 	if newState:
 		changeState(newState)

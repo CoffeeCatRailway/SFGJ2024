@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var moveStateMachine: StateMachine = $MoveStateMachine
 @onready var gunStateMachine: StateMachine = $GunStateMachine
 
+@export var hitSound: AudioStream
+
 func _ready() -> void:
 	moveStateMachine.init(self, $PlayerSprite, $AnimationPlayer, $MoveComponent)
 	gunStateMachine.init(self, $GunSprite, null, $MoveComponent)
@@ -30,6 +32,10 @@ func onHit(isDead: bool) -> void:
 	#tween.tween_property(self, "scale", Vector2(.8, 1.4), .04)
 	#tween.tween_property(self, "scale", Vector2.ONE, .04)
 	Utils.tweenBounce(self)
+	
+	$AudioStreamPlayer2D.stream = hitSound
+	$AudioStreamPlayer2D.pitch_scale = .75 if isDead else 1.
+	$AudioStreamPlayer2D.play()
 	
 	if isDead:
 		print("Dead")

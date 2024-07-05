@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ta2bwyd508t7"]
+
+[ext_resource type="AudioStream" uid="uid://kkvqdomx3kve" path="res://assets/sounds/FreeSFX/GameSFX/Music/ChipWave/Retro Music - ABMU - ChipWave 01.wav" id="1_vbiip"]
+
+[node name="Music" type="Node"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_vbiip")
+autoplay = true
+bus = &"music"

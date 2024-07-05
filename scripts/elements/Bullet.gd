@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(_body: Node2D) -> void:
 	hit()
 
-func _on_area_entered(area: Area2D):
+func _on_area_entered(area: Area2D) -> void:
 	if area.name == "HitZone" && area.has_node("../HealthComponent"):
 		hit(area.get_node("../HealthComponent"))
 

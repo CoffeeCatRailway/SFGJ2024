@@ -7,7 +7,7 @@ extends State
 const WALK_ANIMATION: String = "walk"
 const RUN_ANIMATION: String = "walk"
 
-func update(delta: float) -> State:
+func update(_delta: float) -> State:
 	if healthComponent.health <= 0:
 		return deathState
 	return null
