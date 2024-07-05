@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsxft7ln6kch7"]
+[gd_scene load_steps=6 format=3 uid="uid://bsxft7ln6kch7"]
 
 [ext_resource type="TileSet" uid="uid://dd7enrass2b7r" path="res://assets/tile_set.tres" id="1_pwbnn"]
 [ext_resource type="PackedScene" uid="uid://wrsfj656fqfb" path="res://scenes/character/player.tscn" id="2_eitqb"]
 [ext_resource type="PackedScene" uid="uid://cti4cid1q1wnd" path="res://scenes/elements/ui/health_bar.tscn" id="4_obvge"]
 [ext_resource type="PackedScene" uid="uid://bb1vnw8wd6x4y" path="res://scenes/character/robot.tscn" id="4_wbret"]
+[ext_resource type="PackedScene" uid="uid://vunmfnf8ihah" path="res://scenes/elements/health_capsule.tscn" id="5_l7n48"]
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
@@ -30,32 +31,69 @@ position = Vector2(65, 41)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
-[node name="Robot" parent="." instance=ExtResource("4_wbret")]
-position = Vector2(273, 68)
-
-[node name="Robot2" parent="." instance=ExtResource("4_wbret")]
-position = Vector2(234, 159)
-
-[node name="Robot3" parent="." instance=ExtResource("4_wbret")]
-position = Vector2(435, 85)
-
-[node name="Robot4" parent="." instance=ExtResource("4_wbret")]
-position = Vector2(376, -36)
-
-[node name="Robot5" parent="." instance=ExtResource("4_wbret")]
-position = Vector2(488, -36)
-
-[node name="Robot6" parent="." instance=ExtResource("4_wbret")]
-position = Vector2(376, -144)
-
-[node name="Robot7" parent="." instance=ExtResource("4_wbret")]
-position = Vector2(487, -144)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_obvge")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 1.0
-offset_top = 1.0
-offset_right = 38.0
-offset_bottom = 18.0
+offset_top = -18.0
+offset_right = 39.0
+offset_bottom = -1.0
+grow_vertical = 0
 player = NodePath("../../Player")
+
+[node name="Robots" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Robot" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(273, 68)
+
+[node name="Robot2" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(234, 159)
+
+[node name="Robot3" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(435, 85)
+
+[node name="Robot4" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(376, -36)
+
+[node name="Robot5" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(488, -36)
+
+[node name="Robot6" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(376, -144)
+
+[node name="Robot7" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(487, -144)
+
+[node name="Robot8" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(137, 247)
+
+[node name="Robot9" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(598, 381)
+
+[node name="Robot10" parent="Robots" instance=ExtResource("4_wbret")]
+position = Vector2(655, 298)
+
+[node name="Capsules" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="HealthCapsule" parent="Capsules" instance=ExtResource("5_l7n48")]
+position = Vector2(229, 249)
+
+[node name="HealthCapsule2" parent="Capsules" instance=ExtResource("5_l7n48")]
+position = Vector2(226, 75)
+
+[node name="HealthCapsule3" parent="Capsules" instance=ExtResource("5_l7n48")]
+position = Vector2(432, 27)
+
+[node name="HealthCapsule4" parent="Capsules" instance=ExtResource("5_l7n48")]
+position = Vector2(68, 146)
+
+[node name="HealthCapsule5" parent="Capsules" instance=ExtResource("5_l7n48")]
+position = Vector2(141, 358)
+
+[node name="HealthCapsule6" parent="Capsules" instance=ExtResource("5_l7n48")]
+position = Vector2(243, 341)
