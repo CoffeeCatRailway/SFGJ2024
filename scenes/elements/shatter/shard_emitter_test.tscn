@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://sth4i7kxeqyl"]
+
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_m5tuk"]
+[ext_resource type="PackedScene" uid="uid://cttou4018gwbf" path="res://scenes/elements/shatter/shard_emitter.tscn" id="2_gxkea"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(101, 82)
+texture = ExtResource("1_m5tuk")
+hframes = 32
+vframes = 15
+frame = 389
+
+[node name="ShardEmitter" parent="." instance=ExtResource("2_gxkea")]
+nbr_of_shards = 20
+threshold = 6.5
+min_impulse = 10.0
+max_impulse = 20.0
+display_triangles = true

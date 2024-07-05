@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="10_vfjg1"]
 [ext_resource type="AudioStream" uid="uid://dt2n1i4ikl75g" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit_3.wav" id="12_4y26e"]
 [ext_resource type="AudioStream" uid="uid://qixelfglslyp" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Shoot_2.wav" id="12_b011b"]
+[ext_resource type="PackedScene" uid="uid://cttou4018gwbf" path="res://scenes/elements/shatter/shard_emitter.tscn" id="14_yk6fk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgqa6"]
 radius = 2.0
@@ -162,6 +163,12 @@ offset = Vector2(0, -7)
 hframes = 32
 vframes = 15
 frame = 389
+
+[node name="ShardEmitter" parent="Sprite2D" instance=ExtResource("14_yk6fk")]
+threshold = 6.0
+min_impulse = 20.0
+max_impulse = 40.0
+lifetime = 0.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
