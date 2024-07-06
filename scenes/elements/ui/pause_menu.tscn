@@ -1,0 +1,160 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7o6ctdejk8jw"]
+
+[ext_resource type="Theme" uid="uid://b8yrrewf8l7tp" path="res://assets/ui_theme.tres" id="1_cmkwn"]
+[ext_resource type="Script" path="res://scripts/elements/ui/PauseMenu.gd" id="1_rkw1q"]
+[ext_resource type="AudioStream" uid="uid://dvm1rf7cefjh" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit.wav" id="3_vvloc"]
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="5_rvlnp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oalgl"]
+atlas = ExtResource("5_rvlnp")
+region = Rect2(292, 20, 8, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyojq"]
+atlas = ExtResource("5_rvlnp")
+region = Rect2(292, 19, 8, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxg4m"]
+atlas = ExtResource("5_rvlnp")
+region = Rect2(292, 21, 8, 11)
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_rkw1q")
+clickSound = ExtResource("3_vvloc")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"menu"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.227451, 0.301961, 0.321569, 0.305882)
+
+[node name="PauseButtons" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BtnResume" type="Button" parent="PauseButtons"]
+layout_mode = 2
+theme = ExtResource("1_cmkwn")
+text = "Resume"
+
+[node name="BtnSettings" type="Button" parent="PauseButtons"]
+layout_mode = 2
+theme = ExtResource("1_cmkwn")
+text = "Settings
+"
+
+[node name="BtnQuit" type="Button" parent="PauseButtons"]
+layout_mode = 2
+theme = ExtResource("1_cmkwn")
+text = "Quit"
+
+[node name="Settings" type="Panel" parent="."]
+custom_minimum_size = Vector2(100, 140)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -70.0
+offset_right = 50.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cmkwn")
+
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Volumes" type="VBoxContainer" parent="Settings"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="MasterLabel" type="Label" parent="Settings/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Master"
+horizontal_alignment = 1
+
+[node name="MasterVolume" type="HSlider" parent="Settings/Volumes"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="EffectsLabel" type="Label" parent="Settings/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Effects
+"
+horizontal_alignment = 1
+
+[node name="EffectsVolume" type="HSlider" parent="Settings/Volumes"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="MusicLabel" type="Label" parent="Settings/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Music"
+horizontal_alignment = 1
+
+[node name="MusicVolume" type="HSlider" parent="Settings/Volumes"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="MenuLabel" type="Label" parent="Settings/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="MenuVolume" type="HSlider" parent="Settings/Volumes"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="BtnBack" type="TextureButton" parent="Settings"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 15.0
+texture_normal = SubResource("AtlasTexture_oalgl")
+texture_pressed = SubResource("AtlasTexture_hyojq")
+texture_hover = SubResource("AtlasTexture_fxg4m")

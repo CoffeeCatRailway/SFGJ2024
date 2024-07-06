@@ -104,7 +104,6 @@ hitSound = ExtResource("12_ndewu")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_5hss4")
-immortal = true
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("2_3p3ml")

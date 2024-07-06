@@ -1,12 +1,27 @@
 [gd_scene load_steps=9 format=3 uid="uid://vunmfnf8ihah"]
 
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_qb7f7"]
-[ext_resource type="Script" path="res://scripts/elements/health_capsule.gd" id="2_fcxey"]
+[ext_resource type="Script" path="res://scripts/elements/HealthCapsule.gd" id="2_nvblb"]
 [ext_resource type="FontFile" uid="uid://ch25psfamik74" path="res://assets/fonts/PixelSmall.ttf" id="3_67xdp"]
 [ext_resource type="AudioStream" uid="uid://gfq635hrpq2y" path="res://assets/sounds/Classic Arcade SFX/Power ups and power downs/Power_up_3.wav" id="4_ldg2e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s0iu5"]
 size = Vector2(5, 11)
+
+[sub_resource type="Animation" id="Animation_yt6or"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 4)]
+}
 
 [sub_resource type="Animation" id="Animation_6itxs"]
 resource_name = "idle"
@@ -25,21 +40,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 2), Vector2(0, -2), Vector2(0, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_yt6or"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 4)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nsi5x"]
 _data = {
 "RESET": SubResource("Animation_yt6or"),
@@ -53,7 +53,7 @@ offset = Vector2(0, 4)
 hframes = 32
 vframes = 15
 frame = 235
-script = ExtResource("2_fcxey")
+script = ExtResource("2_nvblb")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
