@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://dd7enrass2b7r" path="res://assets/tile_set.tres" id="1_pwbnn"]
 [ext_resource type="PackedScene" uid="uid://wrsfj656fqfb" path="res://scenes/character/player.tscn" id="2_eitqb"]
-[ext_resource type="PackedScene" uid="uid://cti4cid1q1wnd" path="res://scenes/elements/ui/health_bar.tscn" id="4_obvge"]
+[ext_resource type="PackedScene" uid="uid://cti4cid1q1wnd" path="res://scenes/elements/ui/ui_stats.tscn" id="3_uye25"]
 [ext_resource type="PackedScene" uid="uid://bb1vnw8wd6x4y" path="res://scenes/character/robot.tscn" id="4_wbret"]
 [ext_resource type="PackedScene" uid="uid://vunmfnf8ihah" path="res://scenes/elements/health_capsule.tscn" id="5_l7n48"]
 
@@ -33,16 +33,7 @@ position_smoothing_speed = 10.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_obvge")]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -18.0
-offset_right = 39.0
-offset_bottom = -1.0
-grow_vertical = 0
-player = NodePath("../../Player")
+[node name="UIStats" parent="CanvasLayer" instance=ExtResource("3_uye25")]
 
 [node name="Robots" type="Node2D" parent="."]
 y_sort_enabled = true

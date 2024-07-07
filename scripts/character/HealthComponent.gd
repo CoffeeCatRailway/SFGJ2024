@@ -5,7 +5,7 @@ signal hit(isDead: bool)
 
 @export var immortal: bool = false
 @export var maxHealth: int = 100
-var health: int:
+var health: int = 0:
 	set(value):
 		health = clamp(value, 0, maxHealth)
 

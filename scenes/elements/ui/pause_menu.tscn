@@ -18,6 +18,7 @@ atlas = ExtResource("5_rvlnp")
 region = Rect2(292, 21, 8, 11)
 
 [node name="PauseMenu" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_rkw1q")
 clickSound = ExtResource("3_vvloc")
 

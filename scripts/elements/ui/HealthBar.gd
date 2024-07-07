@@ -1,6 +1,6 @@
 extends Control
 
-@export var player: Player
+@onready var player: Player = %Player
 
 func _ready() -> void:
 	$TextureProgressBar.max_value = player.healthComponent.maxHealth

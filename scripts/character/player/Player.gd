@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @onready var healthComponent: HealthComponent = $HealthComponent
+@onready var staminaComponent: StaminaComponent = $StaminaComponent
 
 @onready var moveStateMachine: StateMachine = $MoveStateMachine
 @onready var gunStateMachine: StateMachine = $GunStateMachine

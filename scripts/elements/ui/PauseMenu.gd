@@ -52,9 +52,9 @@ func pause(p: bool) -> void:
 	visible = p
 	get_tree().current_scene.process_mode = Node.PROCESS_MODE_INHERIT if !visible else Node.PROCESS_MODE_DISABLED
 
-func showSettings(show: bool) -> void:
-	pauseButtons.visible = !show
-	settingsPanel.visible = show
+func showSettings(_show: bool) -> void:
+	pauseButtons.visible = !_show
+	settingsPanel.visible = _show
 
 func playClickSound() -> void:
 	audioPlayer.stream = clickSound
