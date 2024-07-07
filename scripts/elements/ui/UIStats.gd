@@ -13,5 +13,4 @@ func _process(_delta: float) -> void:
 	
 	# Stamina
 	$HBoxContainer/Stamina/TextureProgressBar.value = player.staminaComponent.stamina
-	var pert: float = player.staminaComponent.stamina / player.staminaComponent.maxStamina
-	$HBoxContainer/Stamina/Label.text = "%.2f%%" % pert
+	$HBoxContainer/Stamina/Label.text = "%.1f/%s" % [player.staminaComponent.stamina, player.staminaComponent.maxStamina]
