@@ -3,13 +3,13 @@ extends Sprite2D
 @onready var areaCapsule: Area2D = $Area2D
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
 
-@export var stamina: int = 5
+@export var stamina: float = 5.
 
 func _ready() -> void:
 	$Label.text = "+%s" % stamina
 	$Label.modulate.a = 0.
 	
-	$Area2D.area_entered.connect(onEntered)
+	areaCapsule.area_entered.connect(onEntered)
 
 func onEntered(area: Area2D) -> void:
 	if area.get_parent() is Player:
