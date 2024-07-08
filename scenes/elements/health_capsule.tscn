@@ -1,50 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://vunmfnf8ihah"]
+[gd_scene load_steps=7 format=3 uid="uid://vunmfnf8ihah"]
 
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_qb7f7"]
 [ext_resource type="Script" path="res://scripts/elements/HealthCapsule.gd" id="2_nvblb"]
 [ext_resource type="FontFile" uid="uid://ch25psfamik74" path="res://assets/fonts/PixelSmall.ttf" id="3_67xdp"]
+[ext_resource type="AnimationLibrary" uid="uid://fblqqbqlrypq" path="res://scenes/elements/capsule_animations.res" id="3_h7la4"]
 [ext_resource type="AudioStream" uid="uid://gfq635hrpq2y" path="res://assets/sounds/Classic Arcade SFX/Power ups and power downs/Power_up_3.wav" id="4_ldg2e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s0iu5"]
 size = Vector2(5, 11)
-
-[sub_resource type="Animation" id="Animation_yt6or"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 4)]
-}
-
-[sub_resource type="Animation" id="Animation_6itxs"]
-resource_name = "idle"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 2), Vector2(0, -2), Vector2(0, 2)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsi5x"]
-_data = {
-"RESET": SubResource("Animation_yt6or"),
-"idle": SubResource("Animation_6itxs")
-}
 
 [node name="HealthCapsule" type="Sprite2D"]
 y_sort_enabled = true
@@ -65,7 +28,7 @@ shape = SubResource("RectangleShape2D_s0iu5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_nsi5x")
+"": ExtResource("3_h7la4")
 }
 autoplay = "idle"
 
@@ -81,5 +44,3 @@ text = "+5"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ldg2e")
 bus = &"sfx"
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -3,21 +3,21 @@ extends Sprite2D
 @onready var areaCapsule: Area2D = $Area2D
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
 
-@export var health: int = 5
+@export var stamina: int = 5
 
 func _ready() -> void:
-	$Label.text = "+%s" % health
+	$Label.text = "+%s" % stamina
 	$Label.modulate.a = 0.
 	
-	areaCapsule.area_entered.connect(onEntered)
+	$Area2D.area_entered.connect(onEntered)
 
 func onEntered(area: Area2D) -> void:
 	if area.get_parent() is Player:
 		var player: Player = (area.get_parent() as Player)
-		if player.healthComponent.health >= player.healthComponent.maxHealth:
+		if player.staminaComponent.stamina >= player.staminaComponent.maxStamina:
 			return
 		
-		(area.get_parent() as Player).healthComponent.health += health
+		(area.get_parent() as Player).staminaComponent.stamina += stamina
 		$AudioStreamPlayer.play()
 		
 		var tween: Tween = create_tween().bind_node(self).set_parallel()
