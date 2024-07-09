@@ -5,7 +5,7 @@ extends Node
 
 @export var maxStamina: float = 50.
 @export var drainRate: float = 5.
-@export var regenRate: float = 3.
+@export var regenRate: float = 5.
 var stamina: float = .01:
 	set(value):
 		stamina = clamp(value, 0., maxStamina)
