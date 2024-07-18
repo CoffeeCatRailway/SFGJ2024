@@ -8,9 +8,6 @@ extends CharacterBody2D
 @onready var moveStateMachine: StateMachine = $MoveStateMachine
 @onready var gunStateMachine: StateMachine = $GunStateMachine
 
-@onready var raycast: RayCast2D = $RayCast2D
-var rayTarget: Node2D
-
 @export var hitSound: AudioStream
 
 func _ready() -> void:
@@ -26,11 +23,7 @@ func _process(delta: float) -> void:
 	moveStateMachine.update(delta)
 	gunStateMachine.update(delta)
 	
-	raycast.look_at(%Player.global_position)
-	if raycast.is_colliding() && raycast.get_collider() && raycast.get_collider().get_parent() is Player:
-		rayTarget = raycast.get_collider().get_parent()
-	if (rayTarget is Player && rayTarget.healthComponent.isDead) || (rayTarget && rayTarget.global_position.distance_to(global_position) > 200.):
-		rayTarget = null
+	$TargeterComponent.look_at(%Player.global_position)
 
 func _physics_process(delta: float) -> void:
 	if healthComponent.isDead:

@@ -1,10 +1,10 @@
 extends StateGunIdle
 
-@export var robot: Robot
+@export var targeterComponent: TargeterComponent
 
 func getLookTarget() -> Vector2:
-	if robot.rayTarget:
-		return robot.rayTarget.global_position
+	if targeterComponent.target:
+		return targeterComponent.target.global_position
 	return Vector2.INF
 
 func shouldFire() -> bool:

@@ -1,13 +1,13 @@
 extends MoveComponent
 
-@export var robot: Robot
+@export var targeterComponent: TargeterComponent
 @export var minFollowDist: float = 30.
 
 func getMoveVector() -> Vector2:
-	if !robot.rayTarget:
+	if !targeterComponent.target:
 		return Vector2.ZERO
 	
-	var dir: Vector2 = (robot.rayTarget.global_position - robot.global_position)
+	var dir: Vector2 = (targeterComponent.target.global_position - targeterComponent.global_position)
 	if dir.length() < minFollowDist:
 		return Vector2.ZERO
 	return dir.limit_length() * speed

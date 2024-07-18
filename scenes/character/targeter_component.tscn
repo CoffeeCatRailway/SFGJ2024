@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwd78w1ehekv4"]
+
+[ext_resource type="Script" path="res://scripts/elements/RayTargeter.gd" id="1_0mmj5"]
+[ext_resource type="Script" path="res://scripts/character/player/Player.gd" id="2_xcvvo"]
+
+[node name="TargeterComponent" type="RayCast2D"]
+target_position = Vector2(100, 0)
+collision_mask = 3
+collide_with_areas = true
+script = ExtResource("1_0mmj5")
+targetScript = ExtResource("2_xcvvo")
