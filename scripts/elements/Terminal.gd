@@ -13,20 +13,22 @@ func _ready() -> void:
 
 func readyPost() -> void:
 	if active:
-		activate()
+		activate(-100.)
 	else:
-		deactivate()
+		deactivate(-100.)
 
-func activate() -> void:
+func activate(volume: float = 0.) -> void:
 	active = true
 	animPlayer.play("active" + ("Purple" if isPurple else "Green"))
+	audio.volume_db = volume
 	audio.play()
 	
 	door.lock()
 
-func deactivate() -> void:
+func deactivate(volume: float = 0.) -> void:
 	active = false
 	animPlayer.play("unactive" + ("Purple" if isPurple else "Green"))
+	audio.volume_db = volume
 	audio.play()
 	
 	door.unlock()
