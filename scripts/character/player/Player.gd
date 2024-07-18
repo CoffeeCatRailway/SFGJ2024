@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var staminaComponent: StaminaComponent = $StaminaComponent
 
@@ -34,9 +36,9 @@ func onHit(isDead: bool) -> void:
 	#tween.tween_property(self, "scale", Vector2.ONE, .04)
 	Utils.tweenBounce(self)
 	
-	$AudioStreamPlayer2D.stream = hitSound
-	$AudioStreamPlayer2D.pitch_scale = .75 if isDead else 1.
-	$AudioStreamPlayer2D.play()
+	audio.stream = hitSound
+	audio.pitch_scale = .75 if isDead else 1.
+	audio.play()
 	
 	if isDead:
 		print("Dead")

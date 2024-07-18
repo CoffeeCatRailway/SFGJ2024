@@ -1,19 +1,20 @@
-[gd_scene load_steps=24 format=3 uid="uid://bb1vnw8wd6x4y"]
+[gd_scene load_steps=23 format=3 uid="uid://bb1vnw8wd6x4y"]
 
-[ext_resource type="Script" path="res://scripts/character/enemy/RobotMoveComponent.gd" id="1_2l8uu"]
+[ext_resource type="Script" path="res://scripts/character/robot/Robot.gd" id="1_2bjms"]
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_vtly7"]
-[ext_resource type="Script" path="res://scripts/character/enemy/Robot.gd" id="1_wnats"]
 [ext_resource type="Script" path="res://scripts/stateMachine/StateMachine.gd" id="2_dkkwy"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/StateIdle.gd" id="3_iefyn"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/StateWalk.gd" id="4_3uuwe"]
-[ext_resource type="Script" path="res://scripts/character/enemy/RobotStateGunIdle.gd" id="6_8uac2"]
+[ext_resource type="Script" path="res://scripts/character/robot/RobotMoveComponent.gd" id="4_mf07t"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/gun/StateGunFire.gd" id="7_2d083"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/StateDeath.gd" id="7_fow78"]
 [ext_resource type="PackedScene" uid="uid://7p38obrwep6u" path="res://scenes/elements/bullet.tscn" id="8_5xox3"]
+[ext_resource type="Script" path="res://scripts/character/robot/RobotStateGunIdle.gd" id="9_yedj2"]
 [ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="10_vfjg1"]
 [ext_resource type="AudioStream" uid="uid://dt2n1i4ikl75g" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit_3.wav" id="12_4y26e"]
 [ext_resource type="AudioStream" uid="uid://qixelfglslyp" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Shoot_2.wav" id="12_b011b"]
 [ext_resource type="PackedScene" uid="uid://cttou4018gwbf" path="res://scenes/elements/shatter/shard_emitter.tscn" id="14_yk6fk"]
+[ext_resource type="PackedScene" uid="uid://cdn54cspoptpy" path="res://scenes/character/health_bar.tscn" id="15_tuio7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgqa6"]
 radius = 2.0
@@ -93,23 +94,17 @@ region = Rect2(152, 86, 13, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gkp2"]
 size = Vector2(12, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_u1n34"]
-atlas = ExtResource("1_vtly7")
-region = Rect2(97, 161, 14, 1)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_afanb"]
-atlas = ExtResource("1_vtly7")
-region = Rect2(97, 163, 14, 1)
-
 [node name="Robot" type="CharacterBody2D"]
-script = ExtResource("1_wnats")
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_2bjms")
 hitSound = ExtResource("12_4y26e")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("10_vfjg1")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("robot")]
-script = ExtResource("1_2l8uu")
+script = ExtResource("4_mf07t")
 robot = NodePath("..")
 speed = 50.0
 
@@ -137,7 +132,7 @@ script = ExtResource("2_dkkwy")
 initialState = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="GunStateMachine" node_paths=PackedStringArray("robot", "fireState", "marker", "timer")]
-script = ExtResource("6_8uac2")
+script = ExtResource("9_yedj2")
 robot = NodePath("../..")
 fireState = NodePath("../Fire")
 marker = NodePath("../../GunSprite/Marker2D")
@@ -161,7 +156,7 @@ y_sort_enabled = true
 texture = ExtResource("1_vtly7")
 offset = Vector2(0, -7)
 hframes = 32
-vframes = 15
+vframes = 16
 frame = 389
 
 [node name="ShardEmitter" parent="Sprite2D" instance=ExtResource("14_yk6fk")]
@@ -200,13 +195,10 @@ collide_with_areas = true
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
-offset_left = -7.0
-offset_top = -15.0
-offset_right = 7.0
-offset_bottom = -14.0
-texture_under = SubResource("AtlasTexture_u1n34")
-texture_progress = SubResource("AtlasTexture_afanb")
+[node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("15_tuio7")]
+offset_top = -16.0
+offset_bottom = -15.0
+healthComponent = NodePath("../HealthComponent")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -5.0

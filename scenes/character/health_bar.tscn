@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdn54cspoptpy"]
+
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_u2o1j"]
+[ext_resource type="Script" path="res://scripts/character/HealthBar.gd" id="2_rtd87"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1n34"]
+atlas = ExtResource("1_u2o1j")
+region = Rect2(97, 161, 14, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afanb"]
+atlas = ExtResource("1_u2o1j")
+region = Rect2(97, 163, 14, 1)
+
+[node name="HealthBar" type="TextureProgressBar"]
+custom_minimum_size = Vector2(14, 1)
+offset_left = -7.0
+offset_top = -1.0
+offset_right = 7.0
+texture_under = SubResource("AtlasTexture_u1n34")
+texture_progress = SubResource("AtlasTexture_afanb")
+script = ExtResource("2_rtd87")

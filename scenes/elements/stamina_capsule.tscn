@@ -14,7 +14,7 @@ y_sort_enabled = true
 texture = ExtResource("1_0mkee")
 offset = Vector2(0, 2)
 hframes = 32
-vframes = 15
+vframes = 16
 frame = 233
 script = ExtResource("2_negpg")
 
