@@ -29,7 +29,7 @@ layer_2/tile_data = PackedInt32Array(458765, 1, 65536, 1048604, 1, 131072, 13107
 
 [node name="Player" parent="." instance=ExtResource("2_eitqb")]
 unique_name_in_owner = true
-position = Vector2(65, 41)
+position = Vector2(33, 90)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
@@ -52,10 +52,10 @@ position = Vector2(234, 151)
 position = Vector2(432, 56)
 
 [node name="Robot6" parent="Robots" instance=ExtResource("4_wbret")]
-position = Vector2(376, -81)
+position = Vector2(233, 388)
 
 [node name="Robot7" parent="Robots" instance=ExtResource("4_wbret")]
-position = Vector2(487, -81)
+position = Vector2(164, 34)
 
 [node name="Robot8" parent="Robots" instance=ExtResource("4_wbret")]
 position = Vector2(137, 247)
@@ -97,6 +97,14 @@ position = Vector2(267, 362)
 
 [node name="StaminaCapsule4" parent="Capsules" instance=ExtResource("6_nj4c2")]
 position = Vector2(673, 354)
+
+[node name="HealthCapsule6" parent="Capsules" instance=ExtResource("5_l7n48")]
+position = Vector2(381, -151)
+health = 10
+
+[node name="StaminaCapsule5" parent="Capsules" instance=ExtResource("6_nj4c2")]
+position = Vector2(484, -46)
+stamina = 10.0
 
 [node name="Door" parent="." instance=ExtResource("7_vb0em")]
 position = Vector2(432, 92)

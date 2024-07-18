@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bb1vnw8wd6x4y"]
+[gd_scene load_steps=23 format=3 uid="uid://bb1vnw8wd6x4y"]
 
 [ext_resource type="Script" path="res://scripts/character/robot/Robot.gd" id="1_2bjms"]
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_vtly7"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/character/robot/RobotMoveComponent.gd" id="4_mf07t"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/gun/StateGunFire.gd" id="7_2d083"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/StateDeath.gd" id="7_fow78"]
-[ext_resource type="PackedScene" uid="uid://7p38obrwep6u" path="res://scenes/elements/bullet.tscn" id="8_5xox3"]
 [ext_resource type="Script" path="res://scripts/character/robot/RobotStateGunIdle.gd" id="9_yedj2"]
 [ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="10_vfjg1"]
 [ext_resource type="AudioStream" uid="uid://dt2n1i4ikl75g" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit_3.wav" id="12_4y26e"]
@@ -143,7 +142,6 @@ timer = NodePath("../../Timer")
 script = ExtResource("7_2d083")
 idleState = NodePath("../Idle")
 marker = NodePath("../../GunSprite/Marker2D")
-bulletScene = ExtResource("8_5xox3")
 isPurple = true
 shootSound = ExtResource("12_b011b")
 audioStreamPlayer = NodePath("../../AudioStreamPlayer2D")

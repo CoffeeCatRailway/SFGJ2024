@@ -1,0 +1,177 @@
+[gd_scene load_steps=20 format=3 uid="uid://8nfd0iykfa3f"]
+
+[ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="1_epkl3"]
+[ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBoss.gd" id="1_escp0"]
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_isfcm"]
+[ext_resource type="Script" path="res://scripts/stateMachine/StateMachine.gd" id="2_h5ug2"]
+[ext_resource type="AudioStream" uid="uid://dt2n1i4ikl75g" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit_3.wav" id="2_wggs6"]
+[ext_resource type="Script" path="res://scripts/character/player/Player.gd" id="3_w45ob"]
+[ext_resource type="PackedScene" uid="uid://cttou4018gwbf" path="res://scenes/elements/shatter/shard_emitter.tscn" id="4_wvtsw"]
+[ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBossIdleState.gd" id="4_x455i"]
+[ext_resource type="PackedScene" uid="uid://cdn54cspoptpy" path="res://scenes/character/health_bar.tscn" id="5_2yq5u"]
+[ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBossPhase1State.gd" id="7_7b1on"]
+[ext_resource type="AudioStream" uid="uid://qixelfglslyp" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Shoot_2.wav" id="8_o7c4f"]
+[ext_resource type="PackedScene" uid="uid://dwd78w1ehekv4" path="res://scenes/character/targeter_component.tscn" id="9_mmrxd"]
+[ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBossPhase2State.gd" id="9_vebom"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t2pvu"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_jpewb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(7, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_htcnw"]
+resource_name = "phase2"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(8, 5), Vector2i(8, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_w66rb"]
+resource_name = "phase1"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(7, 5), Vector2i(7, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8tqy"]
+_data = {
+"RESET": SubResource("Animation_jpewb"),
+"phase1": SubResource("Animation_w66rb"),
+"phase2": SubResource("Animation_htcnw")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hd07e"]
+radius = 11.0
+
+[node name="AlienBoss" type="CharacterBody2D"]
+script = ExtResource("1_escp0")
+hitSound = ExtResource("2_wggs6")
+scrpt = ExtResource("3_w45ob")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_epkl3")
+maxHealth = 150
+
+[node name="MoveStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("2_h5ug2")
+initialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MoveStateMachine" node_paths=PackedStringArray("phase1State", "targeterComponent")]
+script = ExtResource("4_x455i")
+phase1State = NodePath("../Phase1")
+targeterComponent = NodePath("../../TargeterComponent")
+
+[node name="Phase1" type="Node" parent="MoveStateMachine" node_paths=PackedStringArray("phase2State", "markers", "healthComponent", "targeterComponent", "audioStreamPlayer", "timer")]
+script = ExtResource("7_7b1on")
+phase2State = NodePath("../Phase2")
+markers = NodePath("../../Markers")
+healthComponent = NodePath("../../HealthComponent")
+targeterComponent = NodePath("../../TargeterComponent")
+shootSound = ExtResource("8_o7c4f")
+audioStreamPlayer = NodePath("../../AudioStreamPlayer2D")
+timer = NodePath("../../Timer")
+
+[node name="Phase2" type="Node" parent="MoveStateMachine" node_paths=PackedStringArray("markers", "healthComponent", "audioStreamPlayer", "timer")]
+script = ExtResource("9_vebom")
+markers = NodePath("../../Markers")
+healthComponent = NodePath("../../HealthComponent")
+shootSound = ExtResource("8_o7c4f")
+audioStreamPlayer = NodePath("../../AudioStreamPlayer2D")
+timer = NodePath("../../Timer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t2pvu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_isfcm")
+hframes = 16
+vframes = 8
+frame = 87
+
+[node name="ShardEmitter" parent="Sprite2D" instance=ExtResource("4_wvtsw")]
+threshold = 6.0
+min_impulse = 20.0
+max_impulse = 40.0
+lifetime = 0.5
+
+[node name="EyeSprite" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-2.5, 1)
+texture = ExtResource("1_isfcm")
+region_enabled = true
+region_rect = Rect2(238, 159, 2, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u8tqy")
+}
+autoplay = "phase1"
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+shape = SubResource("CircleShape2D_hd07e")
+
+[node name="TargeterComponent" parent="." instance=ExtResource("9_mmrxd")]
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("5_2yq5u")]
+offset_top = -19.0
+offset_bottom = -18.0
+healthComponent = NodePath("../HealthComponent")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"sfx"
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Markers"]
+position = Vector2(15, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="Markers"]
+position = Vector2(0, 15)
+rotation = 1.5708
+
+[node name="Marker2D3" type="Marker2D" parent="Markers"]
+position = Vector2(-15, 0)
+rotation = 3.14159
+
+[node name="Marker2D4" type="Marker2D" parent="Markers"]
+position = Vector2(0, -15)
+rotation = 4.71239
+
+[node name="Timer" type="Timer" parent="."]

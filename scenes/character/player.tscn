@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://wrsfj656fqfb"]
+[gd_scene load_steps=22 format=3 uid="uid://wrsfj656fqfb"]
 
 [ext_resource type="Script" path="res://scripts/character/player/Player.gd" id="1_4iakk"]
 [ext_resource type="Script" path="res://scripts/stateMachine/MoveComponent.gd" id="2_3p3ml"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://scripts/stateMachine/states/gun/StateGunIdle.gd" id="6_u46qw"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/gun/StateGunFire.gd" id="7_1wht5"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/StateDeath.gd" id="7_uiny4"]
-[ext_resource type="PackedScene" uid="uid://7p38obrwep6u" path="res://scenes/elements/bullet.tscn" id="8_6dkoo"]
 [ext_resource type="AudioStream" uid="uid://qixelfglslyp" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Shoot_2.wav" id="12_dox17"]
 [ext_resource type="AudioStream" uid="uid://dt2n1i4ikl75g" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit_3.wav" id="12_ndewu"]
 
@@ -151,7 +150,6 @@ maxShootTime = 0.15
 script = ExtResource("7_1wht5")
 idleState = NodePath("../Idle")
 marker = NodePath("../../GunSprite/Marker2D")
-bulletScene = ExtResource("8_6dkoo")
 shootSound = ExtResource("12_dox17")
 audioStreamPlayer = NodePath("../../AudioStreamPlayer2D")
 
