@@ -1,8 +1,6 @@
 class_name AlienBoss
 extends CharacterBody2D
 
-@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
 @onready var healthComponent: HealthComponent = $HealthComponent
 
 @onready var moveStateMachine: StateMachine = $MoveStateMachine
@@ -11,6 +9,7 @@ extends CharacterBody2D
 @onready var eyeSprite: Sprite2D = $Sprite2D/EyeSprite
 @onready var targeterComponent: TargeterComponent = $TargeterComponent
 
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @export var hitSound: AudioStream
 
 @export var scrpt: GDScript

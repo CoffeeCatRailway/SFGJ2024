@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://8nfd0iykfa3f"]
+[gd_scene load_steps=22 format=3 uid="uid://8nfd0iykfa3f"]
 
 [ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="1_epkl3"]
 [ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBoss.gd" id="1_escp0"]
@@ -11,8 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://cdn54cspoptpy" path="res://scenes/character/health_bar.tscn" id="5_2yq5u"]
 [ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBossPhase1State.gd" id="7_7b1on"]
 [ext_resource type="AudioStream" uid="uid://qixelfglslyp" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Shoot_2.wav" id="8_o7c4f"]
+[ext_resource type="AudioStream" uid="uid://bplxdvsb4ynea" path="res://assets/sounds/FreeSFX/GameSFX/Music/Negative/Retro Negative Melody 01 - aCustom1.wav" id="9_hw2ly"]
 [ext_resource type="PackedScene" uid="uid://dwd78w1ehekv4" path="res://scenes/character/targeter_component.tscn" id="9_mmrxd"]
 [ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBossPhase2State.gd" id="9_vebom"]
+[ext_resource type="AudioStream" uid="uid://g2m7qwxj387v" path="res://assets/sounds/FreeSFX/GameSFX/Music/Negative/Retro Negative Melody 02 - space voice pad.wav" id="11_t3yok"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t2pvu"]
 radius = 6.0
@@ -32,23 +34,6 @@ tracks/0/keys = {
 "values": [Vector2i(7, 5)]
 }
 
-[sub_resource type="Animation" id="Animation_htcnw"]
-resource_name = "phase2"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2i(8, 5), Vector2i(8, 6)]
-}
-
 [sub_resource type="Animation" id="Animation_w66rb"]
 resource_name = "phase1"
 length = 0.4
@@ -64,6 +49,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2i(7, 5), Vector2i(7, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_htcnw"]
+resource_name = "phase2"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(8, 5), Vector2i(8, 6)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u8tqy"]
@@ -83,7 +85,7 @@ scrpt = ExtResource("3_w45ob")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("1_epkl3")
-maxHealth = 150
+maxHealth = 300
 
 [node name="MoveStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("2_h5ug2")
@@ -101,6 +103,7 @@ markers = NodePath("../../Markers")
 healthComponent = NodePath("../../HealthComponent")
 targeterComponent = NodePath("../../TargeterComponent")
 shootSound = ExtResource("8_o7c4f")
+angrySound = ExtResource("11_t3yok")
 audioStreamPlayer = NodePath("../../AudioStreamPlayer2D")
 timer = NodePath("../../Timer")
 
@@ -109,6 +112,7 @@ script = ExtResource("9_vebom")
 markers = NodePath("../../Markers")
 healthComponent = NodePath("../../HealthComponent")
 shootSound = ExtResource("8_o7c4f")
+angrySound = ExtResource("9_hw2ly")
 audioStreamPlayer = NodePath("../../AudioStreamPlayer2D")
 timer = NodePath("../../Timer")
 

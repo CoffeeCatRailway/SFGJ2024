@@ -5,7 +5,9 @@ extends State
 
 @export var bulletSpeed: float = 225.
 @export var bulletDamage: int = 20
+
 @export var shootSound: AudioStream
+@export var angrySound: AudioStream
 @export var audioStreamPlayer: AudioStreamPlayer2D
 @export var timer: Timer
 
@@ -17,6 +19,8 @@ func enter() -> void:
 	timer.one_shot = true
 	timer.wait_time = .25
 	timer.start()
+	
+	Music.playSfx(angrySound, 5.)
 
 func update(_delta: float) -> State:
 	markers.rotation_degrees += 1.

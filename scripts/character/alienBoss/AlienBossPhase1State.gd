@@ -8,7 +8,9 @@ extends State
 
 @export var bulletSpeed: float = 215.
 @export var bulletDamage: int = 15
+
 @export var shootSound: AudioStream
+@export var angrySound: AudioStream
 @export var audioStreamPlayer: AudioStreamPlayer2D
 @export var timer: Timer
 
@@ -20,12 +22,15 @@ func enter() -> void:
 	timer.one_shot = true
 	timer.wait_time = .45
 	timer.start()
+	
+	Music.playSfx(angrySound, 5.)
 
 func update(_delta: float) -> State:
 	if healthComponent.health < healthComponent.maxHealth / 2.:
 		return phase2State
 	
-	markers.look_at(targeterComponent.target.global_position)
+	if targeterComponent.target:
+		markers.look_at(targeterComponent.target.global_position)
 	
 	if timer.is_stopped():
 		Utils.shootBullet(get_tree().current_scene, markers.get_child(0).global_position, markers.rotation, true, bulletSpeed, bulletDamage)

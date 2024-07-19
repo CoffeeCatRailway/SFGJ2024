@@ -3,6 +3,7 @@ extends Node
 
 @export var moveComponent: MoveComponent
 
+@export var infinite: bool = false
 @export var maxStamina: float = 50.
 @export var drainRate: float = 5.
 @export var regenRate: float = 5.
@@ -17,6 +18,9 @@ func _ready() -> void:
 	stamina = maxStamina
 
 func _process(delta: float) -> void:
+	if infinite:
+		return
+	
 	if stamina >= maxStamina: # Check outside regen if statement incase of outside changes (capsules)
 		regen = false
 	elif stamina <= regenThreshold:

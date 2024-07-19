@@ -1,13 +1,12 @@
 class_name Robot
 extends CharacterBody2D
 
-@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
 @onready var healthComponent: HealthComponent = $HealthComponent
 
 @onready var moveStateMachine: StateMachine = $MoveStateMachine
 @onready var gunStateMachine: StateMachine = $GunStateMachine
 
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @export var hitSound: AudioStream
 
 func _ready() -> void:
