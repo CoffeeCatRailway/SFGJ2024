@@ -154,7 +154,9 @@ shape = SubResource("CircleShape2D_hd07e")
 [node name="TargeterComponent" parent="." instance=ExtResource("9_mmrxd")]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("5_2yq5u")]
+offset_left = -16.0
 offset_top = -19.0
+offset_right = 16.0
 offset_bottom = -18.0
 healthComponent = NodePath("../HealthComponent")
 

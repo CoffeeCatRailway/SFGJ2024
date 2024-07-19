@@ -17,6 +17,9 @@ extends CanvasLayer
 @onready var menuVolume: HSlider = $Settings/Volumes/MenuVolume
 @onready var btnSettingsBack: TextureButton = $Settings/BtnBack
 
+# Set true in MainMenu
+var canPause: bool = false
+
 func _ready() -> void:
 	visible = false
 	showSettings(false)
@@ -32,7 +35,7 @@ func _ready() -> void:
 	btnSettingsBack.pressed.connect(onSettingsBackPressed)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") && canPause:
 		if pauseButtons.visible:
 			pause(!visible)
 		else:
