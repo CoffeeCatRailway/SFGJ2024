@@ -188,6 +188,7 @@ position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_5gkp2")
 
 [node name="TargeterComponent" parent="." instance=ExtResource("15_4xh7m")]
+maxDistance = 200.0
 
 [node name="Timer" type="Timer" parent="."]
 
