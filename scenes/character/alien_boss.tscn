@@ -12,9 +12,9 @@
 [ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBossPhase1State.gd" id="7_7b1on"]
 [ext_resource type="AudioStream" uid="uid://qixelfglslyp" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Shoot_2.wav" id="8_o7c4f"]
 [ext_resource type="AudioStream" uid="uid://bplxdvsb4ynea" path="res://assets/sounds/FreeSFX/GameSFX/Music/Negative/Retro Negative Melody 01 - aCustom1.wav" id="9_hw2ly"]
-[ext_resource type="PackedScene" uid="uid://dwd78w1ehekv4" path="res://scenes/character/targeter_component.tscn" id="9_mmrxd"]
 [ext_resource type="Script" path="res://scripts/character/alienBoss/AlienBossPhase2State.gd" id="9_vebom"]
 [ext_resource type="AudioStream" uid="uid://g2m7qwxj387v" path="res://assets/sounds/FreeSFX/GameSFX/Music/Negative/Retro Negative Melody 02 - space voice pad.wav" id="11_t3yok"]
+[ext_resource type="PackedScene" uid="uid://dwd78w1ehekv4" path="res://scenes/elements/targeter_component.tscn" id="14_x5jof"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t2pvu"]
 radius = 6.0
@@ -151,7 +151,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
 shape = SubResource("CircleShape2D_hd07e")
 
-[node name="TargeterComponent" parent="." instance=ExtResource("9_mmrxd")]
+[node name="TargeterComponent" parent="." instance=ExtResource("14_x5jof")]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("5_2yq5u")]
 offset_left = -16.0

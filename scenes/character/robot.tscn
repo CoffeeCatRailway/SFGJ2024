@@ -12,8 +12,8 @@
 [ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="10_vfjg1"]
 [ext_resource type="AudioStream" uid="uid://dt2n1i4ikl75g" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit_3.wav" id="12_4y26e"]
 [ext_resource type="AudioStream" uid="uid://qixelfglslyp" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Shoot_2.wav" id="12_b011b"]
+[ext_resource type="PackedScene" uid="uid://dwd78w1ehekv4" path="res://scenes/elements/targeter_component.tscn" id="14_ro8el"]
 [ext_resource type="PackedScene" uid="uid://cttou4018gwbf" path="res://scenes/elements/shatter/shard_emitter.tscn" id="14_yk6fk"]
-[ext_resource type="PackedScene" uid="uid://dwd78w1ehekv4" path="res://scenes/character/targeter_component.tscn" id="15_4xh7m"]
 [ext_resource type="PackedScene" uid="uid://cdn54cspoptpy" path="res://scenes/character/health_bar.tscn" id="15_tuio7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgqa6"]
@@ -187,8 +187,8 @@ collision_mask = 2
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_5gkp2")
 
-[node name="TargeterComponent" parent="." instance=ExtResource("15_4xh7m")]
-maxDistance = 200.0
+[node name="TargeterComponent" parent="." instance=ExtResource("14_ro8el")]
+maxDistance = 300.0
 
 [node name="Timer" type="Timer" parent="."]
 

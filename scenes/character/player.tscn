@@ -144,7 +144,7 @@ fireState = NodePath("../Fire")
 marker = NodePath("../../GunSprite/Marker2D")
 timer = NodePath("../../Timer")
 minShootTime = 0.15
-maxShootTime = 0.15
+maxShootTime = 0.2
 
 [node name="Fire" type="Node" parent="GunStateMachine" node_paths=PackedStringArray("idleState", "marker", "audioStreamPlayer")]
 script = ExtResource("7_1wht5")

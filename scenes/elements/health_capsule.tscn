@@ -17,6 +17,7 @@ hframes = 32
 vframes = 16
 frame = 235
 script = ExtResource("2_nvblb")
+health = 10
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -39,7 +40,7 @@ offset_top = -9.0
 offset_right = 4.0
 offset_bottom = 5.0
 theme_override_fonts/font = ExtResource("3_67xdp")
-text = "+5"
+text = "+10"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ldg2e")

@@ -1,0 +1,191 @@
+[gd_scene load_steps=23 format=3 uid="uid://cvt2dpkn5dfc2"]
+
+[ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="1_265yv"]
+[ext_resource type="Script" path="res://scripts/character/robot/Robot.gd" id="1_nfikg"]
+[ext_resource type="AudioStream" uid="uid://dt2n1i4ikl75g" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit_3.wav" id="2_1rltk"]
+[ext_resource type="Script" path="res://scripts/character/robot/RobotMoveComponent.gd" id="2_nok2v"]
+[ext_resource type="Script" path="res://scripts/stateMachine/StateMachine.gd" id="3_5b8dv"]
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="4_j6awt"]
+[ext_resource type="PackedScene" uid="uid://cttou4018gwbf" path="res://scenes/elements/shatter/shard_emitter.tscn" id="5_oqy3d"]
+[ext_resource type="PackedScene" uid="uid://dwd78w1ehekv4" path="res://scenes/elements/targeter_component.tscn" id="6_5wxib"]
+[ext_resource type="Script" path="res://scripts/stateMachine/states/StateIdle.gd" id="6_6g1cg"]
+[ext_resource type="PackedScene" uid="uid://cdn54cspoptpy" path="res://scenes/character/health_bar.tscn" id="7_gvi7r"]
+[ext_resource type="Script" path="res://scripts/stateMachine/states/StateWalk.gd" id="7_qolv0"]
+[ext_resource type="Script" path="res://scripts/stateMachine/states/StateDeath.gd" id="8_cps6h"]
+[ext_resource type="Script" path="res://scripts/character/robot/RobotStateGunIdle.gd" id="9_4kx7i"]
+[ext_resource type="Script" path="res://scripts/stateMachine/states/gun/StateGunFire.gd" id="10_24xfn"]
+[ext_resource type="AudioStream" uid="uid://dd6nkasw3xiq8" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Laser_4.wav" id="11_u0e87"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8xsb"]
+radius = 2.0
+height = 12.0
+
+[sub_resource type="Animation" id="Animation_202p4"]
+resource_name = "idle"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(3, 11), Vector2i(3, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_ib1fe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_hqi1u"]
+resource_name = "walk"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 10), Vector2i(3, 11), Vector2i(3, 12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b7cvb"]
+_data = {
+"RESET": SubResource("Animation_ib1fe"),
+"idle": SubResource("Animation_202p4"),
+"walk": SubResource("Animation_hqi1u")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mba2q"]
+atlas = ExtResource("4_j6awt")
+region = Rect2(203, 84, 20, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2n3n7"]
+size = Vector2(18, 17)
+
+[node name="robotMedium" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_nfikg")
+hitSound = ExtResource("2_1rltk")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_265yv")
+maxHealth = 150
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("targeterComponent")]
+script = ExtResource("2_nok2v")
+targeterComponent = NodePath("../TargeterComponent")
+speed = 50.0
+
+[node name="MoveStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("3_5b8dv")
+initialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MoveStateMachine" node_paths=PackedStringArray("walkState", "deathState", "healthComponent")]
+script = ExtResource("6_6g1cg")
+walkState = NodePath("../Walk")
+deathState = NodePath("../Death")
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="Walk" type="Node" parent="MoveStateMachine" node_paths=PackedStringArray("idleState", "deathState", "healthComponent")]
+script = ExtResource("7_qolv0")
+idleState = NodePath("../Idle")
+deathState = NodePath("../Death")
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="Death" type="Node" parent="MoveStateMachine"]
+script = ExtResource("8_cps6h")
+
+[node name="GunStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("3_5b8dv")
+initialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="GunStateMachine" node_paths=PackedStringArray("targeterComponent", "fireState", "marker", "timer")]
+script = ExtResource("9_4kx7i")
+targeterComponent = NodePath("../../TargeterComponent")
+fireState = NodePath("../Fire")
+marker = NodePath("../../GunSprite/Marker2D")
+timer = NodePath("../../Timer")
+minShootTime = 0.25
+maxShootTime = 0.35
+
+[node name="Fire" type="Node" parent="GunStateMachine" node_paths=PackedStringArray("idleState", "marker", "audioStreamPlayer")]
+script = ExtResource("10_24xfn")
+idleState = NodePath("../Idle")
+marker = NodePath("../../GunSprite/Marker2D")
+isPurple = true
+shootSound = ExtResource("11_u0e87")
+audioStreamPlayer = NodePath("../../AudioStreamPlayer2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_a8xsb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("4_j6awt")
+offset = Vector2(0, -7)
+hframes = 32
+vframes = 16
+frame = 387
+
+[node name="ShardEmitter" parent="Sprite2D" instance=ExtResource("5_oqy3d")]
+threshold = 6.0
+min_impulse = 20.0
+max_impulse = 40.0
+lifetime = 0.3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b7cvb")
+}
+autoplay = "idle"
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = SubResource("AtlasTexture_mba2q")
+offset = Vector2(11, 0)
+
+[node name="Marker2D" type="Marker2D" parent="GunSprite"]
+position = Vector2(22, -2)
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 6
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_2n3n7")
+
+[node name="TargeterComponent" parent="." instance=ExtResource("6_5wxib")]
+maxDistance = 200.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("7_gvi7r")]
+offset_top = -17.0
+offset_bottom = -16.0
+healthComponent = NodePath("../HealthComponent")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"sfx"
