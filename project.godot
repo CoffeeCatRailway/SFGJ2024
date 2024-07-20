@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SausageFest GameJam 2024"
-config/version="0.0.1.20"
+config/version="0.0.1.21"
 run/main_scene="res://scenes/elements/ui/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
@@ -26,6 +26,7 @@ Constants="*res://scripts/global/Constants.gd"
 Utils="*res://scripts/global/Utils.gd"
 Music="*res://scenes/global/music.tscn"
 PauseMenu="*res://scenes/elements/ui/pause_menu.tscn"
+EndGameMenu="*res://scenes/elements/ui/end_game_menu.tscn"
 
 [debug]
 

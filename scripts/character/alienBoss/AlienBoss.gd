@@ -57,4 +57,5 @@ func onHit(isDead: bool) -> void:
 		$HitZone.process_mode = Node.PROCESS_MODE_DISABLED
 		$Sprite2D/ShardEmitter.shatter()
 		await $Sprite2D/ShardEmitter.deleteTimer.timeout
-		queue_free()
+		EndGameMenu.winMenu()
+		#queue_free()

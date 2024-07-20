@@ -16,6 +16,7 @@ layer_0/tile_data = PackedInt32Array(0, 327680, 0, 1, 327680, 0, 2, 327680, 0, 3
 layer_1/tile_data = PackedInt32Array(1, 393216, 4, 9, 327680, 5, 3, 262144, 1, 524293, 196608, 1, 589832, 262144, 4, 10, 196608, 0, 65540, 1835008, 3, 65541, 1900544, 3, 65543, 1703936, 4, 393225, 1703936, 4, 458762, 1638400, 4, 393226, 1638400, 4, 327682, 1703936, 4, 393217, 1703936, 4, 393218, 1638400, 4)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"menu"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

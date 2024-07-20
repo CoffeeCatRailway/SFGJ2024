@@ -20,6 +20,21 @@
 radius = 2.0
 height = 12.0
 
+[sub_resource type="Animation" id="Animation_ib1fe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 12)]
+}
+
 [sub_resource type="Animation" id="Animation_202p4"]
 resource_name = "idle"
 length = 0.2
@@ -35,21 +50,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2i(3, 11), Vector2i(3, 12)]
-}
-
-[sub_resource type="Animation" id="Animation_ib1fe"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(3, 12)]
 }
 
 [sub_resource type="Animation" id="Animation_hqi1u"]

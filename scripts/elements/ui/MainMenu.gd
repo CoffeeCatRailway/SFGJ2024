@@ -9,6 +9,7 @@ extends Node2D
 @onready var btnQuit: Button = $CanvasLayer/VBoxContainer/BtnQuit
 
 func _ready() -> void:
+	PauseMenu.canPause = false
 	btnPlay.pressed.connect(onPlayPressed)
 	btnQuit.pressed.connect(onQuitPressed)
 

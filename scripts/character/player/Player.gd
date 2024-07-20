@@ -41,5 +41,6 @@ func onHit(isDead: bool) -> void:
 	audio.play()
 	
 	if isDead:
-		print("Dead")
+		#print("Dead")
+		EndGameMenu.loseMenu()
 		#queue_free()
