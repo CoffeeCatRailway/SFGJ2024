@@ -3,8 +3,8 @@ extends CanvasLayer
 @onready var audioPlayer: AudioStreamPlayer = $AudioStreamPlayer
 @export var clickSound: AudioStream
 
-@export var winColor: Color = Color.hex(0x3a4d524e)
-@export var loseColor: Color = Color.hex(0xd046484e)
+@export var winColor: Color
+@export var loseColor: Color
 
 @onready var btnPlay: Button = $Control/HBoxContainer/BtnPlay
 @onready var btnQuit: Button = $Control/HBoxContainer/BtnQuit

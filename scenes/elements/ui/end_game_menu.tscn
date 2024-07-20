@@ -45,6 +45,8 @@ _data = {
 [node name="EndGameMenu" type="CanvasLayer"]
 script = ExtResource("1_i86kg")
 clickSound = ExtResource("2_o5duj")
+winColor = Color(0.227451, 0.301961, 0.321569, 1)
+loseColor = Color(0.815686, 0.27451, 0.282353, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"menu"
@@ -64,13 +66,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
+self_modulate = Color(1, 1, 1, 0.305882)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.227451, 0.301961, 0.321569, 0.305882)
+color = Color(0.227451, 0.301961, 0.321569, 1)
 
 [node name="Win" type="Control" parent="Control"]
 custom_minimum_size = Vector2(88, 62)
