@@ -6,9 +6,12 @@ extends CanvasLayer
 @export var winColor: Color
 @export var loseColor: Color
 
+@onready var colorRect: ColorRect = $Control/ColorRect
+@onready var label: Label = $Control/Label
+@onready var statsLabel: Label = $Control/StatsLabel
+
 @onready var btnPlay: Button = $Control/HBoxContainer/BtnPlay
 @onready var btnQuit: Button = $Control/HBoxContainer/BtnQuit
-
 
 func _ready() -> void:
 	visible = false
@@ -20,10 +23,7 @@ func showMenu() -> void:
 	PauseMenu.canPause = false
 	visible = true
 	$AnimationPlayer.play("fade")
-
-func hideMenu() -> void:
-	PauseMenu.canPause = true
-	visible = false
+	statsLabel.text = "Time: " + str(StatTracker.kills) + "  Kills: " + StatTracker.stop()
 
 func playClickSound() -> void:
 	audioPlayer.stream = clickSound
@@ -31,20 +31,18 @@ func playClickSound() -> void:
 
 func winMenu() -> void:
 	showMenu()
-	$Control/ColorRect.color = winColor
-	$Control/Win.visible = true
-	$Control/Lose.visible = false
+	colorRect.color = winColor
+	label.text = "You Won"
 
 func loseMenu() -> void:
 	showMenu()
-	$Control/ColorRect.color = loseColor
-	$Control/Win.visible = false
-	$Control/Lose.visible = true
+	colorRect.color = loseColor
+	label.text = "You Died"
 
 # Win
 func onPlayPressed() -> void:
 	playClickSound()
-	hideMenu()
+	visible = false
 	get_tree().reload_current_scene()
 
 func onQuitPressed() -> void:

@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsxft7ln6kch7"]
+[gd_scene load_steps=13 format=3 uid="uid://bsxft7ln6kch7"]
 
+[ext_resource type="Script" path="res://scenes/levels/level1.gd" id="1_igvfh"]
 [ext_resource type="TileSet" uid="uid://dd7enrass2b7r" path="res://assets/tile_set.tres" id="1_pwbnn"]
 [ext_resource type="PackedScene" uid="uid://wrsfj656fqfb" path="res://scenes/character/player.tscn" id="2_eitqb"]
 [ext_resource type="PackedScene" uid="uid://cti4cid1q1wnd" path="res://scenes/elements/ui/ui_stats.tscn" id="3_uye25"]
@@ -14,6 +15,7 @@
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_igvfh")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true

@@ -19,7 +19,6 @@ func playClickSound() -> void:
 
 func onPlayPressed() -> void:
 	playClickSound()
-	PauseMenu.canPause = true
 	get_tree().change_scene_to_packed(level)
 
 func onQuitPressed() -> void:
