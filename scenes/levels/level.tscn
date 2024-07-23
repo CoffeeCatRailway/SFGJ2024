@@ -112,6 +112,10 @@ position = Vector2(673, 354)
 position = Vector2(381, -151)
 health = 15
 
+[node name="HealthCapsule10" parent="Capsules" instance=ExtResource("5_l7n48")]
+position = Vector2(486, -123)
+health = 15
+
 [node name="StaminaCapsule5" parent="Capsules" instance=ExtResource("6_nj4c2")]
 position = Vector2(484, -46)
 stamina = 10.0
