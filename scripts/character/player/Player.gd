@@ -40,7 +40,7 @@ func onHit(isDead: bool) -> void:
 	audio.pitch_scale = .75 if isDead else 1.
 	audio.play()
 	
-	if isDead:
+	if isDead && !EndGameMenu.visible:
 		#print("Dead")
 		EndGameMenu.loseMenu()
 		#queue_free()
