@@ -26,7 +26,7 @@ func showMenu(won: bool) -> void:
 	$AnimationPlayer.play("fade")
 	var time: int = StatTracker.stop(won)
 	statsLabel.text = "Kills: " + str(StatTracker.kills) + "  Time: " + StatTracker.getTimeString(time)
-	statsBestLabel.text = "Best: Kills: " + str(SaveManager.saveResource.bestKills) + "  Time: " + StatTracker.getTimeString(SaveManager.saveResource.bestTime)
+	statsBestLabel.text = "Most Kills: " + str(SaveManager.saveResource.bestKills) + "  Best Time: " + StatTracker.getTimeString(SaveManager.saveResource.bestTime)
 
 func playClickSound() -> void:
 	audioPlayer.stream = clickSound
