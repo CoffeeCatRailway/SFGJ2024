@@ -4,17 +4,30 @@ var kills: int = 0
 var startTime: int = -1
 
 func _ready() -> void:
-	reset()
+	resetCurrent()
 
-func reset() -> void:
+func resetCurrent() -> void:
 	kills = 0
 	startTime = -1
+
+func addKill(amount: int = 1) -> void:
+	kills += amount
 
 func start() -> void:
 	startTime = Time.get_ticks_msec()
 
-func stop() -> String:
+func stop(gameWon: bool) -> int:
 	var time: int = Time.get_ticks_msec() - startTime
+	
+	if gameWon:
+		if kills > SaveManager.saveResource.bestKills:
+			SaveManager.saveResource.bestKills = kills
+		if time < SaveManager.saveResource.bestTime:
+			SaveManager.saveResource.bestTime = time
+	
+	return time
+
+func getTimeString(time: int) -> String:
 	var minutes: int = int(time / 60 / 1000)
 	var seconds: int = int(time / 1000) % 60
 	var miliseconds: int = time % 1000

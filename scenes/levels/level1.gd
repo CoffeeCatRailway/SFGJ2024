@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready() -> void:
-	StatTracker.reset()
+	StatTracker.resetCurrent()
 	StatTracker.start()
 	
 	PauseMenu.canPause = true

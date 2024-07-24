@@ -42,6 +42,6 @@ func onHit(isDead: bool) -> void:
 		#await $AudioStreamPlayer2D.finished
 		$HitZone.process_mode = Node.PROCESS_MODE_DISABLED
 		$Sprite2D/ShardEmitter.shatter()
-		StatTracker.kills += 1
+		StatTracker.addKill(1)
 		await $Sprite2D/ShardEmitter.deleteTimer.timeout
 		queue_free()

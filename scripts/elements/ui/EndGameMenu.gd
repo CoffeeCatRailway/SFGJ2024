@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var colorRect: ColorRect = $Control/ColorRect
 @onready var label: Label = $Control/Label
 @onready var statsLabel: Label = $Control/StatsLabel
+@onready var statsBestLabel: Label = $Control/StatsBestLabel
 
 @onready var btnPlay: Button = $Control/HBoxContainer/BtnPlay
 @onready var btnQuit: Button = $Control/HBoxContainer/BtnQuit
@@ -19,23 +20,25 @@ func _ready() -> void:
 	btnPlay.pressed.connect(onPlayPressed)
 	btnQuit.pressed.connect(onQuitPressed)
 
-func showMenu() -> void:
+func showMenu(won: bool) -> void:
 	PauseMenu.canPause = false
 	visible = true
 	$AnimationPlayer.play("fade")
-	statsLabel.text = "Time: " + str(StatTracker.kills) + "  Kills: " + StatTracker.stop()
+	var time: int = StatTracker.stop(won)
+	statsLabel.text = "Kills: " + str(StatTracker.kills) + "  Time: " + StatTracker.getTimeString(time)
+	statsBestLabel.text = "Best: Kills: " + str(SaveManager.saveResource.bestKills) + "  Time: " + StatTracker.getTimeString(SaveManager.saveResource.bestTime)
 
 func playClickSound() -> void:
 	audioPlayer.stream = clickSound
 	audioPlayer.play()
 
 func winMenu() -> void:
-	showMenu()
+	showMenu(true)
 	colorRect.color = winColor
 	label.text = "You Won"
 
 func loseMenu() -> void:
-	showMenu()
+	showMenu(false)
 	colorRect.color = loseColor
 	label.text = "You Died"
 

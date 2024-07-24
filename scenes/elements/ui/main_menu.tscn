@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6rvsrtaqke3o"]
+[gd_scene load_steps=14 format=3 uid="uid://c6rvsrtaqke3o"]
 
 [ext_resource type="TileSet" uid="uid://dd7enrass2b7r" path="res://assets/tile_set.tres" id="1_egso4"]
 [ext_resource type="Script" path="res://scripts/elements/ui/MainMenu.gd" id="1_noswe"]
 [ext_resource type="Theme" uid="uid://b8yrrewf8l7tp" path="res://assets/ui_theme.tres" id="2_1jg5o"]
 [ext_resource type="AudioStream" uid="uid://dvm1rf7cefjh" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit.wav" id="2_iocdh"]
 [ext_resource type="Script" path="res://scripts/elements/ui/CreditsButton.gd" id="5_gtsbp"]
+[ext_resource type="FontFile" uid="uid://dvhth4o8tqfrf" path="res://assets/fonts/PixelHigh.ttf" id="5_i3bqb"]
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="5_qkvm4"]
 [ext_resource type="FontFile" uid="uid://ch25psfamik74" path="res://assets/fonts/PixelSmall.ttf" id="7_au7ui"]
 [ext_resource type="FontFile" uid="uid://bus73bjwrn87v" path="res://assets/fonts/PixelMiddle.ttf" id="8_jnjeq"]
@@ -79,6 +80,26 @@ layer_1/tile_data = PackedInt32Array(1, 393216, 4, 9, 327680, 5, 3, 262144, 1, 5
 bus = &"menu"
 
 [node name="CanvasCommon" type="CanvasLayer" parent="."]
+
+[node name="GameTitle" type="Label" parent="CanvasCommon"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = 33.0
+offset_right = 73.0
+offset_bottom = 47.0
+grow_horizontal = 2
+theme = ExtResource("2_1jg5o")
+theme_override_colors/font_color = Color(0.435294, 0.533333, 0.517647, 1)
+theme_override_colors/font_shadow_color = Color(0.0666667, 0.0941176, 0.109804, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("5_i3bqb")
+theme_override_font_sizes/font_size = 16
+text = "SausageFest GameJam 2024"
+horizontal_alignment = 1
 
 [node name="BtnCredits" type="TextureButton" parent="CanvasCommon" node_paths=PackedStringArray("mainMenu")]
 custom_minimum_size = Vector2(32, 27)
