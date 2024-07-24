@@ -1,9 +1,12 @@
 extends Node
 
 ## Facing enum
-#enum Facing {
-	#UP, DOWN, LEFT, RIGHT
-#}
+enum Facing {
+	UP = 0,
+	RIGHT = 1,
+	DOWN = 2,
+	LEFT = 3
+}
 
 ## Tilemaps & Layers
 enum Layers {

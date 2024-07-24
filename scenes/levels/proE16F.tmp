@@ -1,0 +1,91 @@
+[gd_scene load_steps=25 format=3 uid="uid://bkufgiyu6cer6"]
+
+[ext_resource type="PackedScene" uid="uid://cxwp7wfs2mgvw" path="res://scenes/levels/rooms/room_end_east.tscn" id="1_0o3ms"]
+[ext_resource type="Script" path="res://scripts/levels/StationGeneratorR3-WFC.gd" id="1_g82yc"]
+[ext_resource type="PackedScene" uid="uid://befbsjoi7r37e" path="res://scenes/levels/rooms/room_end_west.tscn" id="2_36umr"]
+[ext_resource type="PackedScene" uid="uid://dwogm003tr45a" path="res://scenes/levels/rooms/room_end_north.tscn" id="2_y3x0p"]
+[ext_resource type="PackedScene" uid="uid://wrsfj656fqfb" path="res://scenes/character/player.tscn" id="3_dx7c2"]
+[ext_resource type="PackedScene" uid="uid://c2xjxasn26s70" path="res://scenes/levels/rooms/room_end_south.tscn" id="3_mt2vb"]
+[ext_resource type="PackedScene" uid="uid://ba6oklgd1nw11" path="res://scenes/levels/rooms/room_straight_horizontal.tscn" id="5_apqr0"]
+[ext_resource type="PackedScene" uid="uid://bxgey7xf768hd" path="res://scenes/levels/rooms/room_straight_vertical.tscn" id="6_lqxql"]
+[ext_resource type="PackedScene" uid="uid://by0jpdq2d3w5p" path="res://scenes/levels/rooms/room_intersection_cross.tscn" id="7_h4j30"]
+[ext_resource type="PackedScene" uid="uid://duf16em4rpw8h" path="res://scenes/levels/rooms/room_intersection_east.tscn" id="9_8gmjl"]
+[ext_resource type="PackedScene" uid="uid://c80m7i3qpix25" path="res://scenes/levels/rooms/room_intersection_west.tscn" id="10_nwa2g"]
+[ext_resource type="PackedScene" uid="uid://cuxuaeanm3uh4" path="res://scenes/levels/rooms/room_corner_north_east.tscn" id="11_0unyn"]
+[ext_resource type="PackedScene" uid="uid://bxqfsqundq2qh" path="res://scenes/levels/rooms/room_corner_north_west.tscn" id="12_l73ax"]
+[ext_resource type="PackedScene" uid="uid://c8rwgc7xewt1i" path="res://scenes/levels/rooms/room_corner_south_east.tscn" id="13_g21my"]
+[ext_resource type="PackedScene" uid="uid://40ah0xl8utqg" path="res://scenes/levels/rooms/room_corner_south_west.tscn" id="14_ng2vk"]
+[ext_resource type="PackedScene" uid="uid://d0r8b7anij58o" path="res://scenes/levels/rooms/room_intersection_north.tscn" id="15_pqx41"]
+[ext_resource type="PackedScene" uid="uid://25w8jwxg0gcs" path="res://scenes/levels/rooms/room_intersection_south.tscn" id="16_ewlqw"]
+[ext_resource type="Texture2D" uid="uid://n7l0mlqyx5yb" path="res://assets/textures/tiles.png" id="17_sh7sd"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_wgt8s"]
+resource_name = "rooms_end"
+scenes/1/scene = ExtResource("1_0o3ms")
+scenes/2/scene = ExtResource("2_y3x0p")
+scenes/3/scene = ExtResource("3_mt2vb")
+scenes/4/scene = ExtResource("2_36umr")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_26tee"]
+resource_name = "rooms_straight"
+scenes/1/scene = ExtResource("5_apqr0")
+scenes/2/scene = ExtResource("6_lqxql")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_spa5u"]
+resource_name = "rooms_corner"
+scenes/1/scene = ExtResource("7_h4j30")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0o2o4"]
+resource_name = "rooms"
+scenes/1/scene = ExtResource("2_y3x0p")
+scenes/2/scene = ExtResource("3_mt2vb")
+scenes/3/scene = ExtResource("1_0o3ms")
+scenes/4/scene = ExtResource("2_36umr")
+scenes/5/scene = ExtResource("5_apqr0")
+scenes/6/scene = ExtResource("6_lqxql")
+scenes/7/scene = ExtResource("7_h4j30")
+scenes/8/scene = ExtResource("15_pqx41")
+scenes/9/scene = ExtResource("16_ewlqw")
+scenes/10/scene = ExtResource("9_8gmjl")
+scenes/11/scene = ExtResource("10_nwa2g")
+scenes/12/scene = ExtResource("11_0unyn")
+scenes/13/scene = ExtResource("12_l73ax")
+scenes/14/scene = ExtResource("13_g21my")
+scenes/15/scene = ExtResource("14_ng2vk")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_om0y7"]
+texture = ExtResource("17_sh7sd")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xy2a2"]
+tile_size = Vector2i(192, 192)
+sources/0 = SubResource("TileSetScenesCollectionSource_wgt8s")
+sources/1 = SubResource("TileSetScenesCollectionSource_26tee")
+sources/2 = SubResource("TileSetScenesCollectionSource_spa5u")
+sources/3 = SubResource("TileSetScenesCollectionSource_0o2o4")
+sources/4 = SubResource("TileSetAtlasSource_om0y7")
+
+[node name="ProceduralStation" type="Node2D"]
+
+[node name="StationGenerator" type="Node" parent="." node_paths=PackedStringArray("roomMap")]
+script = ExtResource("1_g82yc")
+roomMap = NodePath("../RoomMap")
+
+[node name="RoomMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_xy2a2")
+format = 2
+layer_1/name = "debug"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+
+[node name="Player" parent="." instance=ExtResource("3_dx7c2")]
+unique_name_in_owner = true
+position = Vector2(96, 96)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.1, 0.1)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
