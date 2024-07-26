@@ -213,6 +213,7 @@ layer_0/tile_data = PackedInt32Array(589820, 65536, 1, 458752, 131072, 1, 524288
 [node name="FadeArea" parent="HiddenHall" instance=ExtResource("13_tlfk1")]
 speed = 0.25
 triggerScript = ExtResource("14_1re22")
+toggle = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HiddenHall/FadeArea"]
 position = Vector2(-16, 144)
