@@ -93,19 +93,19 @@ position = Vector2(278, 73)
 position = Vector2(432, 65)
 
 [node name="robotMedium3" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-142, 188)
+position = Vector2(-157, 200)
 
 [node name="robotMedium4" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-189, 149)
+position = Vector2(-197, 157)
 
 [node name="robotMedium5" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-131, 155)
+position = Vector2(-131, 97)
 
 [node name="robotMedium6" parent="Enemies" instance=ExtResource("6_mqqc5")]
 position = Vector2(-184, 104)
 
 [node name="robotMedium7" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-113, 123)
+position = Vector2(-124, 154)
 
 [node name="Capsules" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -165,6 +165,9 @@ position = Vector2(135, 361)
 
 [node name="HealthCapsule9" parent="Capsules" instance=ExtResource("5_l7n48")]
 position = Vector2(584, 375)
+
+[node name="StaminaCapsule8" parent="Capsules" instance=ExtResource("6_nj4c2")]
+position = Vector2(476, 146)
 
 [node name="Doors" type="Node2D" parent="."]
 y_sort_enabled = true
