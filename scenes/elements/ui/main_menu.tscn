@@ -80,6 +80,7 @@ layer_1/tile_data = PackedInt32Array(1, 393216, 4, 9, 327680, 5, 3, 262144, 1, 5
 bus = &"menu"
 
 [node name="CanvasCommon" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="GameTitle" type="Label" parent="CanvasCommon"]
 anchors_preset = 5
@@ -145,7 +146,6 @@ text = "Credits"
 horizontal_alignment = 1
 
 [node name="Version" type="Label" parent="CanvasCommon"]
-z_index = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
