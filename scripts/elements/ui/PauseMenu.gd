@@ -7,7 +7,9 @@ extends CanvasLayer
 @onready var pauseButtons: VBoxContainer = $PauseButtons
 @onready var btnResume: Button = $PauseButtons/BtnResume
 @onready var btnSettings: Button = $PauseButtons/BtnSettings
-@onready var btnQuit: Button = $PauseButtons/BtnQuit
+
+@export var menuScene: PackedScene = preload("res://scenes/elements/ui/main_menu.tscn")
+@onready var btnMenu: Button = $PauseButtons/BtnMenu
 
 # Settings Menu
 @onready var settingsPanel: Panel = $Settings
@@ -26,7 +28,7 @@ func _ready() -> void:
 	
 	btnResume.pressed.connect(onResumePressed)
 	btnSettings.pressed.connect(onSettingsPressed)
-	btnQuit.pressed.connect(onQuitPressed)
+	btnMenu.pressed.connect(onMenuPressed)
 	
 	call_deferred("setVolumeSliders")
 	btnSettingsBack.pressed.connect(onSettingsBackPressed)
@@ -90,10 +92,10 @@ func onSettingsPressed() -> void:
 	playClickSound()
 	showSettings(true)
 
-func onQuitPressed() -> void:
+func onMenuPressed() -> void:
 	playClickSound()
-	await audioPlayer.finished
-	get_tree().quit()
+	pause(false)
+	get_tree().change_scene_to_packed(menuScene)
 
 # Settings
 func onSettingsBackPressed() -> void:

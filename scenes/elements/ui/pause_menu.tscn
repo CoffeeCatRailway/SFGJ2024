@@ -57,10 +57,10 @@ theme = ExtResource("1_cmkwn")
 text = "Settings
 "
 
-[node name="BtnQuit" type="Button" parent="PauseButtons"]
+[node name="BtnMenu" type="Button" parent="PauseButtons"]
 layout_mode = 2
 theme = ExtResource("1_cmkwn")
-text = "Quit"
+text = "Main Menu"
 
 [node name="Settings" type="Panel" parent="."]
 custom_minimum_size = Vector2(100, 140)

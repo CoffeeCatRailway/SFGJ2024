@@ -1,11 +1,10 @@
 class_name MainMenu
 extends Node2D
 
-@export var level: PackedScene = preload("res://scenes/levels/level.tscn")
-
 @onready var audioPlayer: AudioStreamPlayer = $AudioStreamPlayer
 @export var clickSound: AudioStream
 
+@export var levelScene: PackedScene = preload("res://scenes/levels/level.tscn")
 @onready var btnPlay: Button = $CanvasMain/VBoxContainer/BtnPlay
 @onready var btnQuit: Button = $CanvasMain/VBoxContainer/BtnQuit
 
@@ -37,7 +36,7 @@ func playClickSound() -> void:
 # Main Menu
 func onPlayPressed() -> void:
 	playClickSound()
-	get_tree().change_scene_to_packed(level)
+	get_tree().change_scene_to_packed(levelScene)
 
 func onQuitPressed() -> void:
 	playClickSound()
