@@ -4,12 +4,12 @@ extends Node2D
 @onready var audioPlayer: AudioStreamPlayer = $AudioStreamPlayer
 @export var clickSound: AudioStream
 
+var creditsToggle: bool = false
+@onready var btnCredits: TextureButton = $CanvasCommon/BtnCredits
+
 @export var levelScene: PackedScene = preload("res://scenes/levels/level.tscn")
 @onready var btnPlay: Button = $CanvasMain/VBoxContainer/BtnPlay
 @onready var btnQuit: Button = $CanvasMain/VBoxContainer/BtnQuit
-
-var creditsToggle: bool = false
-@onready var btnCredits: TextureButton = $CanvasCommon/BtnCredits
 
 @onready var labelArt: RichTextLabel = $CanvasCredits/LabelArt
 @onready var labelSound: RichTextLabel = $CanvasCredits/LabelSound
@@ -20,10 +20,11 @@ func _ready() -> void:
 	$CanvasMain.visible = true
 	$CanvasCredits.visible = false
 	
+	btnCredits.pressed.connect(onCreditsPressed)
+	$CanvasCommon/Version.text = "Version: " + ProjectSettings.get_setting("application/config/version")
+	
 	btnPlay.pressed.connect(onPlayPressed)
 	btnQuit.pressed.connect(onQuitPressed)
-	
-	btnCredits.pressed.connect(onCreditsPressed)
 	
 	labelArt.meta_clicked.connect(handleRichTextMetaClick)
 	labelSound.meta_clicked.connect(handleRichTextMetaClick)

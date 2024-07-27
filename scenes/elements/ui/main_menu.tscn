@@ -144,6 +144,20 @@ theme_override_font_sizes/font_size = 16
 text = "Credits"
 horizontal_alignment = 1
 
+[node name="Version" type="Label" parent="CanvasCommon"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -12.0
+offset_right = 42.0
+offset_bottom = 2.0
+grow_vertical = 0
+theme = ExtResource("2_1jg5o")
+theme_override_colors/font_color = Color(0.113725, 0.156863, 0.188235, 1)
+theme_override_font_sizes/font_size = 16
+text = "Version: 0.0.0.0"
+
 [node name="CanvasMain" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasMain"]
