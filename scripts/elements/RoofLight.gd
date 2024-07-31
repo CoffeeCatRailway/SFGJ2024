@@ -7,6 +7,8 @@ var noiseTex: NoiseTexture2D
 var timePassed: float = 0.
 
 func _ready() -> void:
+	$Sprite2D.scale = Vector2.ONE / scale
+	
 	randomize()
 	var noise: FastNoiseLite = FastNoiseLite.new()
 	noise.seed = randi() % 10

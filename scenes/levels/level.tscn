@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bsxft7ln6kch7"]
+[gd_scene load_steps=21 format=3 uid="uid://bsxft7ln6kch7"]
 
 [ext_resource type="Script" path="res://scenes/levels/level1.gd" id="1_igvfh"]
 [ext_resource type="TileSet" uid="uid://dd7enrass2b7r" path="res://assets/tile_set.tres" id="1_pwbnn"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dltw8bb3s30m5" path="res://scenes/elements/fade_area.tscn" id="13_tlfk1"]
 [ext_resource type="Script" path="res://scripts/character/player/Player.gd" id="14_1re22"]
 [ext_resource type="PackedScene" uid="uid://b7m4au6jc27y" path="res://scenes/elements/roof_light.tscn" id="16_nt754"]
+[ext_resource type="Texture2D" uid="uid://bk25tgmn55joo" path="res://assets/textures/spotlight.png" id="17_wo45g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uoxyf"]
 texture = ExtResource("13_11pux")
@@ -234,6 +235,13 @@ shape = SubResource("RectangleShape2D_mjbil")
 
 [node name="RoofLight" parent="Lights" instance=ExtResource("16_nt754")]
 position = Vector2(96, 38.3438)
+scale = Vector2(1.6875, 1.63542)
+
+[node name="RoofLight7" parent="Lights" instance=ExtResource("16_nt754")]
+visible = false
+position = Vector2(96, 40.388)
+scale = Vector2(2.53125, 2.04427)
+texture = ExtResource("17_wo45g")
 
 [node name="RoofLight2" parent="Lights" instance=ExtResource("16_nt754")]
 position = Vector2(280, 35)
