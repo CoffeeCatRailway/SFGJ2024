@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7m4au6jc27y"]
+
+[ext_resource type="Texture2D" uid="uid://bbspqlmsregp5" path="res://assets/textures/light_gradient.tres" id="1_7vgeo"]
+[ext_resource type="Script" path="res://scripts/elements/RoofLight.gd" id="2_dqxad"]
+
+[node name="RoofLight" type="PointLight2D"]
+scale = Vector2(1.6875, 1.63542)
+color = Color(0.694118, 0.141176, 0.0941176, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("1_7vgeo")
+offset = Vector2(0, 27)
+height = 8.0
+script = ExtResource("2_dqxad")

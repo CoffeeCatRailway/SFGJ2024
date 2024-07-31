@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bb1vnw8wd6x4y"]
+[gd_scene load_steps=26 format=3 uid="uid://bb1vnw8wd6x4y"]
 
 [ext_resource type="Script" path="res://scripts/character/robot/Robot.gd" id="1_2bjms"]
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_vtly7"]
@@ -12,13 +12,19 @@
 [ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="10_vfjg1"]
 [ext_resource type="AudioStream" uid="uid://dt2n1i4ikl75g" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit_3.wav" id="12_4y26e"]
 [ext_resource type="AudioStream" uid="uid://qixelfglslyp" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Shoot_2.wav" id="12_b011b"]
+[ext_resource type="Texture2D" uid="uid://c086ekegeyil" path="res://assets/textures/normal.png" id="14_cy1ex"]
 [ext_resource type="PackedScene" uid="uid://dwd78w1ehekv4" path="res://scenes/elements/targeter_component.tscn" id="14_ro8el"]
 [ext_resource type="PackedScene" uid="uid://cttou4018gwbf" path="res://scenes/elements/shatter/shard_emitter.tscn" id="14_yk6fk"]
+[ext_resource type="PackedScene" uid="uid://b26ummy7l0tq3" path="res://scenes/elements/torch_light.tscn" id="15_lvkm3"]
 [ext_resource type="PackedScene" uid="uid://cdn54cspoptpy" path="res://scenes/character/health_bar.tscn" id="15_tuio7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgqa6"]
 radius = 2.0
 height = 12.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_w3s2o"]
+diffuse_texture = ExtResource("1_vtly7")
+normal_texture = ExtResource("14_cy1ex")
 
 [sub_resource type="Animation" id="Animation_knswg"]
 length = 0.001
@@ -87,9 +93,9 @@ _data = {
 "walk": SubResource("Animation_amtdy")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t1t1d"]
-atlas = ExtResource("1_vtly7")
-region = Rect2(152, 86, 13, 8)
+[sub_resource type="CanvasTexture" id="CanvasTexture_oqfiv"]
+diffuse_texture = ExtResource("1_vtly7")
+normal_texture = ExtResource("14_cy1ex")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gkp2"]
 size = Vector2(12, 16)
@@ -152,7 +158,7 @@ shape = SubResource("CapsuleShape2D_wgqa6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("1_vtly7")
+texture = SubResource("CanvasTexture_w3s2o")
 offset = Vector2(0, -7)
 hframes = 32
 vframes = 16
@@ -173,8 +179,10 @@ autoplay = "idle"
 [node name="GunSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -3)
-texture = SubResource("AtlasTexture_t1t1d")
+texture = SubResource("CanvasTexture_oqfiv")
 offset = Vector2(7, 0)
+region_enabled = true
+region_rect = Rect2(152, 86, 13, 8)
 
 [node name="Marker2D" type="Marker2D" parent="GunSprite"]
 position = Vector2(14, -1)
@@ -189,6 +197,11 @@ shape = SubResource("RectangleShape2D_5gkp2")
 
 [node name="TargeterComponent" parent="." instance=ExtResource("14_ro8el")]
 maxDistance = 300.0
+
+[node name="TorchLight" parent="TargeterComponent" instance=ExtResource("15_lvkm3")]
+position = Vector2(-3, 0)
+scale = Vector2(1.25, 2.5)
+color = Color(0.694118, 0.141176, 0.0941176, 1)
 
 [node name="Timer" type="Timer" parent="."]
 

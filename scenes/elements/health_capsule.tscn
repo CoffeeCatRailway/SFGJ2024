@@ -1,17 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://vunmfnf8ihah"]
+[gd_scene load_steps=9 format=3 uid="uid://vunmfnf8ihah"]
 
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_qb7f7"]
+[ext_resource type="Texture2D" uid="uid://c086ekegeyil" path="res://assets/textures/normal.png" id="2_7bxes"]
 [ext_resource type="Script" path="res://scripts/elements/HealthCapsule.gd" id="2_nvblb"]
 [ext_resource type="FontFile" uid="uid://ch25psfamik74" path="res://assets/fonts/PixelSmall.ttf" id="3_67xdp"]
 [ext_resource type="AnimationLibrary" uid="uid://fblqqbqlrypq" path="res://scenes/elements/capsule_animations.res" id="3_h7la4"]
 [ext_resource type="AudioStream" uid="uid://gfq635hrpq2y" path="res://assets/sounds/Classic Arcade SFX/Power ups and power downs/Power_up_3.wav" id="4_ldg2e"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1rvtu"]
+diffuse_texture = ExtResource("1_qb7f7")
+normal_texture = ExtResource("2_7bxes")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s0iu5"]
 size = Vector2(5, 11)
 
 [node name="HealthCapsule" type="Sprite2D"]
 y_sort_enabled = true
-texture = ExtResource("1_qb7f7")
+texture = SubResource("CanvasTexture_1rvtu")
 offset = Vector2(0, 4)
 hframes = 32
 vframes = 16

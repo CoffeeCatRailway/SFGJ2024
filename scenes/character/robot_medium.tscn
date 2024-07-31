@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cvt2dpkn5dfc2"]
+[gd_scene load_steps=26 format=3 uid="uid://cvt2dpkn5dfc2"]
 
 [ext_resource type="Script" path="res://scripts/character/HealthComponent.gd" id="1_265yv"]
 [ext_resource type="Script" path="res://scripts/character/robot/Robot.gd" id="1_nfikg"]
@@ -15,10 +15,16 @@
 [ext_resource type="Script" path="res://scripts/character/robot/RobotStateGunIdle.gd" id="9_4kx7i"]
 [ext_resource type="Script" path="res://scripts/stateMachine/states/gun/StateGunFire.gd" id="10_24xfn"]
 [ext_resource type="AudioStream" uid="uid://dd6nkasw3xiq8" path="res://assets/sounds/Classic Arcade SFX/Lasers and shooting/Laser_4.wav" id="11_u0e87"]
+[ext_resource type="Texture2D" uid="uid://c086ekegeyil" path="res://assets/textures/normal.png" id="13_5ui6m"]
+[ext_resource type="PackedScene" uid="uid://b26ummy7l0tq3" path="res://scenes/elements/torch_light.tscn" id="16_yuw6l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8xsb"]
 radius = 2.0
 height = 12.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_by05m"]
+diffuse_texture = ExtResource("4_j6awt")
+normal_texture = ExtResource("13_5ui6m")
 
 [sub_resource type="Animation" id="Animation_ib1fe"]
 length = 0.001
@@ -75,9 +81,9 @@ _data = {
 "walk": SubResource("Animation_hqi1u")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mba2q"]
-atlas = ExtResource("4_j6awt")
-region = Rect2(203, 84, 20, 10)
+[sub_resource type="CanvasTexture" id="CanvasTexture_0ft70"]
+diffuse_texture = ExtResource("4_j6awt")
+normal_texture = ExtResource("13_5ui6m")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2n3n7"]
 size = Vector2(18, 17)
@@ -143,7 +149,7 @@ shape = SubResource("CapsuleShape2D_a8xsb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("4_j6awt")
+texture = SubResource("CanvasTexture_by05m")
 offset = Vector2(0, -7)
 hframes = 32
 vframes = 16
@@ -163,8 +169,10 @@ autoplay = "idle"
 
 [node name="GunSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
-texture = SubResource("AtlasTexture_mba2q")
+texture = SubResource("CanvasTexture_0ft70")
 offset = Vector2(11, 0)
+region_enabled = true
+region_rect = Rect2(203, 84, 20, 10)
 
 [node name="Marker2D" type="Marker2D" parent="GunSprite"]
 position = Vector2(22, -2)
@@ -179,6 +187,11 @@ shape = SubResource("RectangleShape2D_2n3n7")
 
 [node name="TargeterComponent" parent="." instance=ExtResource("6_5wxib")]
 maxDistance = 200.0
+
+[node name="TorchLight" parent="TargeterComponent" instance=ExtResource("16_yuw6l")]
+position = Vector2(-3, 0)
+scale = Vector2(1.25, 2.5)
+color = Color(0.694118, 0.141176, 0.0941176, 1)
 
 [node name="Timer" type="Timer" parent="."]
 

@@ -1,17 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqny3hrvgipnd"]
+[gd_scene load_steps=9 format=3 uid="uid://bqny3hrvgipnd"]
 
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="1_0mkee"]
 [ext_resource type="FontFile" uid="uid://ch25psfamik74" path="res://assets/fonts/PixelSmall.ttf" id="2_8et0t"]
 [ext_resource type="AnimationLibrary" uid="uid://fblqqbqlrypq" path="res://scenes/elements/capsule_animations.res" id="2_8o4ch"]
+[ext_resource type="Texture2D" uid="uid://c086ekegeyil" path="res://assets/textures/normal.png" id="2_boygx"]
 [ext_resource type="Script" path="res://scripts/elements/StaminaCapsule.gd" id="2_negpg"]
 [ext_resource type="AudioStream" uid="uid://gfq635hrpq2y" path="res://assets/sounds/Classic Arcade SFX/Power ups and power downs/Power_up_3.wav" id="3_i3ggq"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5ujuc"]
+diffuse_texture = ExtResource("1_0mkee")
+normal_texture = ExtResource("2_boygx")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx7ri"]
 size = Vector2(5, 11)
 
 [node name="StaminaCapsule" type="Sprite2D"]
 y_sort_enabled = true
-texture = ExtResource("1_0mkee")
+texture = SubResource("CanvasTexture_5ujuc")
 offset = Vector2(0, 2)
 hframes = 32
 vframes = 16
