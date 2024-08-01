@@ -74,8 +74,14 @@ func _process(_delta: float) -> void:
 func pause(p: bool) -> void:
 	visible = p
 	get_tree().current_scene.process_mode = Node.PROCESS_MODE_INHERIT if !visible else Node.PROCESS_MODE_DISABLED
+	showSettings(false)
 
 func showSettings(_show: bool) -> void:
+	if _show:
+		btnSettingsBack.grab_focus()
+	else:
+		btnResume.grab_focus()
+	
 	pauseButtons.visible = !_show
 	settingsPanel.visible = _show
 

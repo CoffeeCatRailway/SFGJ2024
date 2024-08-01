@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7o6ctdejk8jw"]
+[gd_scene load_steps=9 format=3 uid="uid://b7o6ctdejk8jw"]
 
 [ext_resource type="Theme" uid="uid://b8yrrewf8l7tp" path="res://assets/ui_theme.tres" id="1_cmkwn"]
 [ext_resource type="Script" path="res://scripts/elements/ui/PauseMenu.gd" id="1_rkw1q"]
 [ext_resource type="AudioStream" uid="uid://dvm1rf7cefjh" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit.wav" id="3_vvloc"]
+[ext_resource type="Script" path="res://scripts/elements/ui/SliderDPad.gd" id="4_wmrh8"]
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="5_rvlnp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oalgl"]
@@ -48,17 +49,27 @@ grow_vertical = 2
 
 [node name="BtnResume" type="Button" parent="PauseButtons"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../BtnSettings")
+focus_next = NodePath("../BtnSettings")
+focus_previous = NodePath("../BtnMenu")
 theme = ExtResource("1_cmkwn")
 text = "Resume"
 
 [node name="BtnSettings" type="Button" parent="PauseButtons"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../BtnResume")
+focus_neighbor_bottom = NodePath("../BtnMenu")
+focus_next = NodePath("../BtnMenu")
+focus_previous = NodePath("../BtnResume")
 theme = ExtResource("1_cmkwn")
 text = "Settings
 "
 
 [node name="BtnMenu" type="Button" parent="PauseButtons"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../BtnSettings")
+focus_next = NodePath("../BtnResume")
+focus_previous = NodePath("../BtnSettings")
 theme = ExtResource("1_cmkwn")
 text = "Main Menu"
 
@@ -113,8 +124,13 @@ horizontal_alignment = 1
 
 [node name="MasterVolume" type="HSlider" parent="Settings/Volumes"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../BtnBack")
+focus_neighbor_bottom = NodePath("../EffectsVolume")
+focus_next = NodePath("../EffectsVolume")
+focus_previous = NodePath("../../BtnBack")
 max_value = 1.0
 step = 0.001
+script = ExtResource("4_wmrh8")
 
 [node name="EffectsLabel" type="Label" parent="Settings/Volumes"]
 layout_mode = 2
@@ -125,8 +141,13 @@ horizontal_alignment = 1
 
 [node name="EffectsVolume" type="HSlider" parent="Settings/Volumes"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../MasterVolume")
+focus_neighbor_bottom = NodePath("../MusicVolume")
+focus_next = NodePath("../MusicVolume")
+focus_previous = NodePath("../MasterVolume")
 max_value = 1.0
 step = 0.001
+script = ExtResource("4_wmrh8")
 
 [node name="MusicLabel" type="Label" parent="Settings/Volumes"]
 layout_mode = 2
@@ -136,8 +157,13 @@ horizontal_alignment = 1
 
 [node name="MusicVolume" type="HSlider" parent="Settings/Volumes"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../EffectsVolume")
+focus_neighbor_bottom = NodePath("../MenuVolume")
+focus_next = NodePath("../MenuVolume")
+focus_previous = NodePath("../EffectsVolume")
 max_value = 1.0
 step = 0.001
+script = ExtResource("4_wmrh8")
 
 [node name="MenuLabel" type="Label" parent="Settings/Volumes"]
 layout_mode = 2
@@ -147,8 +173,12 @@ horizontal_alignment = 1
 
 [node name="MenuVolume" type="HSlider" parent="Settings/Volumes"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../MusicVolume")
+focus_next = NodePath("../../BtnBack")
+focus_previous = NodePath("../MusicVolume")
 max_value = 1.0
 step = 0.001
+script = ExtResource("4_wmrh8")
 
 [node name="BtnBack" type="TextureButton" parent="Settings"]
 layout_mode = 0
@@ -156,6 +186,10 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = 12.0
 offset_bottom = 15.0
+focus_neighbor_bottom = NodePath("../Volumes/MasterVolume")
+focus_next = NodePath("../Volumes/MasterVolume")
+focus_previous = NodePath("../Volumes/MenuVolume")
 texture_normal = SubResource("AtlasTexture_oalgl")
 texture_pressed = SubResource("AtlasTexture_hyojq")
 texture_hover = SubResource("AtlasTexture_fxg4m")
+texture_focused = SubResource("AtlasTexture_fxg4m")

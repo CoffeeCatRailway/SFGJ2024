@@ -5,7 +5,7 @@ extends Node2D
 @export var clickSound: AudioStream
 
 var creditsToggle: bool = false
-@onready var btnCredits: TextureButton = $CanvasCommon/BtnCredits
+@onready var btnCredits: Button = $CanvasCommon/BtnCredits
 
 @export var levelScene: PackedScene = preload("res://scenes/levels/level.tscn")
 @onready var btnPlay: Button = $CanvasMain/VBoxContainer/BtnPlay
@@ -23,6 +23,7 @@ func _ready() -> void:
 	btnCredits.pressed.connect(onCreditsPressed)
 	$CanvasCommon/Version.text = "Version: " + ProjectSettings.get_setting("application/config/version")
 	
+	btnPlay.grab_focus()
 	btnPlay.pressed.connect(onPlayPressed)
 	btnQuit.pressed.connect(onQuitPressed)
 	

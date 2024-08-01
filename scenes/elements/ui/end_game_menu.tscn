@@ -144,9 +144,15 @@ alignment = 1
 
 [node name="BtnPlay" type="Button" parent="Control/HBoxContainer"]
 layout_mode = 2
+focus_neighbor_right = NodePath("../BtnQuit")
+focus_next = NodePath("../BtnQuit")
+focus_previous = NodePath("../BtnQuit")
 text = "Play"
 
 [node name="BtnQuit" type="Button" parent="Control/HBoxContainer"]
 layout_mode = 2
-text = "Quit
+focus_neighbor_left = NodePath("../BtnPlay")
+focus_next = NodePath("../BtnPlay")
+focus_previous = NodePath("../BtnPlay")
+text = "Menu
 "

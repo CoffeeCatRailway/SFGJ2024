@@ -12,6 +12,7 @@ extends CanvasLayer
 @onready var statsBestLabel: Label = $Control/StatsBestLabel
 
 @onready var btnPlay: Button = $Control/HBoxContainer/BtnPlay
+@export var menuScene: PackedScene = preload("res://scenes/elements/ui/main_menu.tscn")
 @onready var btnQuit: Button = $Control/HBoxContainer/BtnQuit
 
 func _ready() -> void:
@@ -23,6 +24,7 @@ func _ready() -> void:
 func showMenu(won: bool) -> void:
 	PauseMenu.canPause = false
 	visible = true
+	btnPlay.grab_focus()
 	$AnimationPlayer.play("fade")
 	var time: int = StatTracker.stop(won)
 	statsLabel.text = "Kills: " + str(StatTracker.kills) + "  Time: " + StatTracker.getTimeString(time)
@@ -50,5 +52,5 @@ func onPlayPressed() -> void:
 
 func onQuitPressed() -> void:
 	playClickSound()
-	await audioPlayer.finished
-	get_tree().quit()
+	visible = false
+	get_tree().change_scene_to_packed(menuScene)
