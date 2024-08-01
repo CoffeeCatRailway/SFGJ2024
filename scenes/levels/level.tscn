@@ -154,19 +154,19 @@ position = Vector2(278, 73)
 position = Vector2(432, 65)
 
 [node name="robotMedium3" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-157, 200)
+position = Vector2(-149, 191)
 
 [node name="robotMedium4" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-197, 157)
+position = Vector2(-182, 155)
 
 [node name="robotMedium5" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-131, 97)
+position = Vector2(-141, 102)
 
 [node name="robotMedium6" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-184, 104)
+position = Vector2(-172, 106)
 
 [node name="robotMedium7" parent="Enemies" instance=ExtResource("6_mqqc5")]
-position = Vector2(-124, 154)
+position = Vector2(-115, 190)
 
 [node name="Capsules" type="Node2D" parent="."]
 y_sort_enabled = true
