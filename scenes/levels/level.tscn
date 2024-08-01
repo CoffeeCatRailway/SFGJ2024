@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bsxft7ln6kch7"]
+[gd_scene load_steps=22 format=3 uid="uid://bsxft7ln6kch7"]
 
 [ext_resource type="Script" path="res://scenes/levels/level1.gd" id="1_igvfh"]
 [ext_resource type="TileSet" uid="uid://dd7enrass2b7r" path="res://assets/tile_set.tres" id="1_pwbnn"]
 [ext_resource type="PackedScene" uid="uid://wrsfj656fqfb" path="res://scenes/character/player.tscn" id="2_eitqb"]
+[ext_resource type="Theme" uid="uid://b8yrrewf8l7tp" path="res://assets/ui_theme.tres" id="3_msi5t"]
 [ext_resource type="PackedScene" uid="uid://cti4cid1q1wnd" path="res://scenes/elements/ui/ui_stats.tscn" id="3_uye25"]
 [ext_resource type="PackedScene" uid="uid://bb1vnw8wd6x4y" path="res://scenes/character/robot.tscn" id="4_wbret"]
 [ext_resource type="PackedScene" uid="uid://vunmfnf8ihah" path="res://scenes/elements/health_capsule.tscn" id="5_l7n48"]
@@ -55,6 +56,53 @@ energy = 0.57
 blend_mode = 2
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
+
+[node name="Controls" type="Control" parent="."]
+z_index = -2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("3_msi5t")
+
+[node name="Move" type="Label" parent="Controls"]
+offset_left = 55.0
+offset_top = 79.0
+offset_right = 104.0
+offset_bottom = 93.0
+theme_override_colors/font_color = Color(0.227451, 0.301961, 0.321569, 1)
+theme_override_font_sizes/font_size = 16
+text = "Move: WASD"
+
+[node name="Terminal" type="Label" parent="Controls"]
+offset_left = 445.0
+offset_top = 262.0
+offset_right = 494.0
+offset_bottom = 285.0
+theme_override_colors/font_color = Color(0.227451, 0.301961, 0.321569, 1)
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 16
+text = "Shoot to open"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Fire" type="Label" parent="Controls"]
+offset_left = 124.0
+offset_top = 138.0
+offset_right = 194.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0.227451, 0.301961, 0.321569, 1)
+theme_override_font_sizes/font_size = 16
+text = "FIRE: Left Mouse"
+
+[node name="Sprint" type="Label" parent="Controls"]
+offset_left = 307.0
+offset_top = 136.0
+offset_right = 360.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.227451, 0.301961, 0.321569, 1)
+theme_override_font_sizes/font_size = 16
+text = "Sprint: CTRL"
 
 [node name="Player" parent="." instance=ExtResource("2_eitqb")]
 unique_name_in_owner = true
