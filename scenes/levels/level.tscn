@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://bsxft7ln6kch7"]
 
-[ext_resource type="Script" path="res://scenes/levels/level1.gd" id="1_igvfh"]
+[ext_resource type="Script" path="res://scripts/levels/level1.gd" id="1_f6cg3"]
 [ext_resource type="TileSet" uid="uid://dd7enrass2b7r" path="res://assets/tile_set.tres" id="1_pwbnn"]
 [ext_resource type="PackedScene" uid="uid://wrsfj656fqfb" path="res://scenes/character/player.tscn" id="2_eitqb"]
 [ext_resource type="Theme" uid="uid://b8yrrewf8l7tp" path="res://assets/ui_theme.tres" id="3_msi5t"]
@@ -34,7 +34,7 @@ size = Vector2(64, 64)
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_igvfh")
+script = ExtResource("1_f6cg3")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
