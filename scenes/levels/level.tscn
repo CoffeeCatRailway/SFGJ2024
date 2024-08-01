@@ -30,7 +30,7 @@ texture = ExtResource("13_11pux")
 sources/0 = SubResource("TileSetAtlasSource_uoxyf")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjbil"]
-size = Vector2(64, 64)
+size = Vector2(48, 64)
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
@@ -280,7 +280,7 @@ triggerScript = ExtResource("14_1re22")
 toggle = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HiddenHall/FadeArea"]
-position = Vector2(-16, 144)
+position = Vector2(-8, 144)
 shape = SubResource("RectangleShape2D_mjbil")
 
 [node name="Lights" type="Node2D" parent="."]
