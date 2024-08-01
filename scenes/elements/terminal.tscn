@@ -106,7 +106,7 @@ size = Vector2(8, 6)
 size = Vector2(12, 18)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h358t"]
-polygon = PackedVector2Array(-4, 6, -4, -8, 4, -8, 4, 6)
+polygon = PackedVector2Array(-4, 6, -4, -2, 4, -2, 4, 6)
 
 [node name="Terminal" type="Sprite2D"]
 y_sort_enabled = true

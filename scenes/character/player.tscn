@@ -102,7 +102,7 @@ diffuse_texture = ExtResource("3_3q8op")
 normal_texture = ExtResource("14_u0aeb")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abd1k"]
-size = Vector2(12, 16)
+size = Vector2(12, 13)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 5
@@ -195,7 +195,7 @@ collision_layer = 6
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
-position = Vector2(0, -6)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_abd1k")
 
 [node name="Timer" type="Timer" parent="."]

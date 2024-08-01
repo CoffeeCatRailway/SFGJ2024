@@ -86,7 +86,7 @@ diffuse_texture = ExtResource("4_j6awt")
 normal_texture = ExtResource("13_5ui6m")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2n3n7"]
-size = Vector2(18, 17)
+size = Vector2(14, 13)
 
 [node name="robotMedium" type="CharacterBody2D"]
 collision_layer = 5
@@ -182,7 +182,7 @@ collision_layer = 6
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
-position = Vector2(0, -6.5)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_2n3n7")
 
 [node name="TargeterComponent" parent="." instance=ExtResource("6_5wxib")]
