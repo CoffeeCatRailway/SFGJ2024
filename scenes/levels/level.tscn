@@ -314,5 +314,5 @@ scale = Vector2(1.35417, 1.46875)
 offset = Vector2(0, 5)
 
 [node name="RoofLight6" parent="Lights" instance=ExtResource("16_nt754")]
-position = Vector2(432, -141.156)
-scale = Vector2(1.35417, 1.46875)
+position = Vector2(432, -137.437)
+scale = Vector2(1.35417, 1.64583)
