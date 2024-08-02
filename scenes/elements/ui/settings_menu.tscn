@@ -1,0 +1,227 @@
+[gd_scene load_steps=14 format=3 uid="uid://csy4j3w07828q"]
+
+[ext_resource type="Theme" uid="uid://b8yrrewf8l7tp" path="res://assets/ui_theme.tres" id="1_keqah"]
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="2_yjspv"]
+[ext_resource type="Script" path="res://scripts/elements/ui/SettingsMenu.gd" id="3_uvyin"]
+[ext_resource type="Script" path="res://scripts/elements/ui/SettingsVolume.gd" id="4_1u54s"]
+[ext_resource type="AudioStream" uid="uid://dvm1rf7cefjh" path="res://assets/sounds/Classic Arcade SFX/Hit/Hit.wav" id="4_ckyum"]
+[ext_resource type="Script" path="res://scripts/elements/ui/SliderDPad.gd" id="4_g2x5d"]
+[ext_resource type="FontFile" uid="uid://ch25psfamik74" path="res://assets/fonts/PixelSmall.ttf" id="7_yylc7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nt1i1"]
+texture = ExtResource("2_yjspv")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(304, 3, 14, 9)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qjba0"]
+texture = ExtResource("2_yjspv")
+region_rect = Rect2(292, 21, 8, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ekak5"]
+texture = ExtResource("2_yjspv")
+region_rect = Rect2(292, 20, 8, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q6h6n"]
+texture = ExtResource("2_yjspv")
+region_rect = Rect2(292, 19, 8, 11)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_acwwg"]
+
+[sub_resource type="FontVariation" id="FontVariation_o8r8j"]
+base_font = ExtResource("7_yylc7")
+spacing_top = -4
+spacing_bottom = -3
+
+[node name="SettingsMenu" type="Panel"]
+custom_minimum_size = Vector2(100, 140)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -70.0
+offset_right = 50.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_keqah")
+theme_override_styles/panel = SubResource("StyleBoxTexture_nt1i1")
+script = ExtResource("3_uvyin")
+clickSound = ExtResource("4_ckyum")
+
+[node name="BtnClose" type="Button" parent="."]
+custom_minimum_size = Vector2(8, 11)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.066
+anchor_top = 0.044
+anchor_right = 0.146
+anchor_bottom = 0.123
+offset_bottom = -0.0600014
+focus_neighbor_right = NodePath("../BtnAudio")
+focus_next = NodePath("../BtnAudio")
+focus_previous = NodePath("../BtnKeybinds")
+theme_override_styles/normal = SubResource("StyleBoxTexture_qjba0")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ekak5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_q6h6n")
+
+[node name="BtnAudio" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.209
+anchor_top = 0.011
+anchor_right = 0.487
+anchor_bottom = 0.15
+offset_left = -0.200005
+offset_top = 0.46
+focus_neighbor_left = NodePath("../BtnClose")
+focus_neighbor_right = NodePath("../BtnKeybinds")
+focus_neighbor_bottom = NodePath("../Audio/Volumes/MasterVolume")
+focus_next = NodePath("../BtnKeybinds")
+focus_previous = NodePath("../BtnClose")
+theme_override_font_sizes/font_size = 16
+disabled = true
+toggle_mode = true
+button_pressed = true
+text = "Audio"
+
+[node name="BtnKeybinds" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.527
+anchor_top = 0.011
+anchor_right = 0.945
+anchor_bottom = 0.15
+offset_left = -0.200001
+offset_top = 0.46
+focus_neighbor_left = NodePath("../BtnAudio")
+focus_next = NodePath("../BtnClose")
+focus_previous = NodePath("../BtnAudio")
+theme_override_font_sizes/font_size = 16
+toggle_mode = true
+text = "Keybinds"
+
+[node name="Audio" type="Panel" parent="." node_paths=PackedStringArray("masterVolume", "effectsVolume", "musicVolume", "menuVolume", "btnReset")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.165
+anchor_right = 0.975
+anchor_bottom = 0.979
+offset_left = -0.3
+offset_bottom = -0.0599976
+script = ExtResource("4_1u54s")
+masterVolume = NodePath("Volumes/MasterVolume")
+effectsVolume = NodePath("Volumes/EffectsVolume")
+musicVolume = NodePath("Volumes/MusicVolume")
+menuVolume = NodePath("Volumes/MenuVolume")
+btnReset = NodePath("Volumes/BtnResetVolume")
+
+[node name="Volumes" type="VBoxContainer" parent="Audio"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="MasterLabel" type="Label" parent="Audio/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Master"
+horizontal_alignment = 1
+
+[node name="MasterVolume" type="HSlider" parent="Audio/Volumes"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../../BtnAudio")
+focus_neighbor_bottom = NodePath("../EffectsVolume")
+focus_next = NodePath("../EffectsVolume")
+focus_previous = NodePath("../../../BtnAudio")
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_g2x5d")
+
+[node name="EffectsLabel" type="Label" parent="Audio/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Effects
+"
+horizontal_alignment = 1
+
+[node name="EffectsVolume" type="HSlider" parent="Audio/Volumes"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MasterVolume")
+focus_neighbor_bottom = NodePath("../MusicVolume")
+focus_next = NodePath("../MusicVolume")
+focus_previous = NodePath("../MasterVolume")
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_g2x5d")
+
+[node name="MusicLabel" type="Label" parent="Audio/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Music"
+horizontal_alignment = 1
+
+[node name="MusicVolume" type="HSlider" parent="Audio/Volumes"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../EffectsVolume")
+focus_neighbor_bottom = NodePath("../MenuVolume")
+focus_next = NodePath("../MenuVolume")
+focus_previous = NodePath("../EffectsVolume")
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_g2x5d")
+
+[node name="MenuLabel" type="Label" parent="Audio/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="MenuVolume" type="HSlider" parent="Audio/Volumes"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MusicVolume")
+focus_neighbor_bottom = NodePath("../BtnResetVolume")
+focus_next = NodePath("../BtnResetVolume")
+focus_previous = NodePath("../MusicVolume")
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_g2x5d")
+
+[node name="HSeparator" type="HSeparator" parent="Audio/Volumes"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_acwwg")
+
+[node name="BtnResetVolume" type="Button" parent="Audio/Volumes"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MenuVolume")
+focus_next = NodePath("../../../BtnAudio")
+focus_previous = NodePath("../MenuVolume")
+theme_override_fonts/font = SubResource("FontVariation_o8r8j")
+theme_override_font_sizes/font_size = 16
+text = "Reset"
+
+[node name="Keybinds" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.165
+anchor_right = 0.972
+anchor_bottom = 0.979
+offset_left = -0.3
+offset_bottom = -0.0599976
