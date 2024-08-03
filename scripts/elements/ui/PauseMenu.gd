@@ -43,7 +43,7 @@ func showSettings(_show: bool) -> void:
 	if _show:
 		settings.btnClose.grab_focus()
 	else:
-		btnResume.grab_focus()
+		btnSettings.grab_focus()
 	
 	pauseButtons.visible = !_show
 	settings.visible = _show

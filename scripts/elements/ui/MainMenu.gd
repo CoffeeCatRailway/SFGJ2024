@@ -5,27 +5,34 @@ extends Node2D
 @export var clickSound: AudioStream
 
 var creditsToggle: bool = false
-@onready var btnCredits: Button = $CanvasCommon/BtnCredits
+@onready var btnCredits: Button = $CanvasLayer/BtnCredits
 
 @export var levelScene: PackedScene = preload("res://scenes/levels/level.tscn")
-@onready var btnPlay: Button = $CanvasMain/VBoxContainer/BtnPlay
-@onready var btnQuit: Button = $CanvasMain/VBoxContainer/BtnQuit
+@onready var btnPlay: Button = $CanvasLayer/VBoxContainer/BtnPlay
+@onready var btnSettings: Button = $CanvasLayer/VBoxContainer/BtnSettings
+@onready var btnQuit: Button = $CanvasLayer/VBoxContainer/BtnQuit
 
-@onready var labelArt: RichTextLabel = $CanvasCredits/LabelArt
-@onready var labelSound: RichTextLabel = $CanvasCredits/LabelSound
-@onready var labelMusic: RichTextLabel = $CanvasCredits/LabelMusic
+@onready var settings: SettingsMenu = $CanvasLayer/SettingsMenu
+
+@onready var labelArt: RichTextLabel = $CanvasLayer/Credits/LabelArt
+@onready var labelSound: RichTextLabel = $CanvasLayer/Credits/LabelSound
+@onready var labelMusic: RichTextLabel = $CanvasLayer/Credits/LabelMusic
 
 func _ready() -> void:
 	PauseMenu.canPause = false
-	$CanvasMain.visible = true
-	$CanvasCredits.visible = false
+	$CanvasLayer/VBoxContainer.visible = true
+	$CanvasLayer/Credits.visible = false
 	
 	btnCredits.pressed.connect(onCreditsPressed)
-	$CanvasCommon/Version.text = "Version: " + ProjectSettings.get_setting("application/config/version")
+	$CanvasLayer/Version.text = "Version: " + ProjectSettings.get_setting("application/config/version")
 	
-	btnPlay.grab_focus()
 	btnPlay.pressed.connect(onPlayPressed)
+	btnSettings.pressed.connect(onSettingsPressed)
 	btnQuit.pressed.connect(onQuitPressed)
+	
+	showSettings(false)
+	settings.btnClose.pressed.connect(onSettingsBackPressed)
+	btnPlay.grab_focus()
 	
 	labelArt.meta_clicked.connect(handleRichTextMetaClick)
 	labelSound.meta_clicked.connect(handleRichTextMetaClick)
@@ -35,15 +42,34 @@ func playClickSound() -> void:
 	audioPlayer.stream = clickSound
 	audioPlayer.play()
 
+func showSettings(_show: bool) -> void:
+	if _show:
+		settings.btnClose.grab_focus()
+	else:
+		btnSettings.grab_focus()
+	
+	#pauseButtons.visible = !_show
+	btnCredits.disabled = _show
+	btnCredits.focus_mode = Control.FOCUS_NONE if _show else Control.FOCUS_ALL
+	settings.visible = _show
+
 # Main Menu
 func onPlayPressed() -> void:
 	playClickSound()
 	get_tree().change_scene_to_packed(levelScene)
 
+func onSettingsPressed() -> void:
+	playClickSound()
+	showSettings(true)
+
 func onQuitPressed() -> void:
 	playClickSound()
 	await audioPlayer.finished
 	get_tree().quit()
+
+func onSettingsBackPressed() -> void:
+	playClickSound()
+	showSettings(false)
 
 # Credits Menu
 func handleRichTextMetaClick(meta: Variant) -> void:
@@ -52,10 +78,10 @@ func handleRichTextMetaClick(meta: Variant) -> void:
 func onCreditsPressed() -> void:
 	playClickSound()
 	if !creditsToggle:
-		$CanvasMain.visible = false
-		$CanvasCredits.visible = true
+		$CanvasLayer/VBoxContainer.visible = false
+		$CanvasLayer/Credits.visible = true
 		creditsToggle = true
 	else:
-		$CanvasMain.visible = true
-		$CanvasCredits.visible = false
+		$CanvasLayer/VBoxContainer.visible = true
+		$CanvasLayer/Credits.visible = false
 		creditsToggle = false
