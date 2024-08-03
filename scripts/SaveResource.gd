@@ -8,3 +8,13 @@ extends Resource
 @export_range(0., 1.) var effectsVolume: float = .33
 @export_range(0., 1.) var musicVolume: float = .186
 @export_range(0., 1.) var menuVolume: float = .314
+
+@export var keyBinds: Dictionary = {
+	"move_up": "W",
+	"move_down": "S",
+	"move_left": "A",
+	"move_right": "D",
+	"run": "Ctrl",
+	"fire": "mouse_1",
+	"pause": "Escape",
+}

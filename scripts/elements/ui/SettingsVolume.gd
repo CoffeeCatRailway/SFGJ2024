@@ -10,7 +10,8 @@ extends Control
 func _ready() -> void:
 	btnReset.pressed.connect(onResetPressed)
 	
-	call_deferred("setVolumeSliders")
+	#call_deferred("setVolumeSliders")
+	setVolumeSliders()
 
 func onResetPressed() -> void:
 	var tempSave: SaveResource = SaveResource.new()

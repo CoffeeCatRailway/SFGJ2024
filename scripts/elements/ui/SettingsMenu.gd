@@ -33,6 +33,7 @@ func onKeybindsPressed() -> void:
 	
 	audio.visible = false
 	keybinds.visible = true
+	keybinds.createActionList()
 	playClickSound()
 
 func playClickSound() -> void:
