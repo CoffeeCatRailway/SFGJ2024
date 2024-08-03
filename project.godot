@@ -14,7 +14,7 @@ config/name="SausageFest GameJam 2024"
 config/version="0.0.1.42"
 run/main_scene="res://scenes/elements/ui/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/textures/icon64.png"
 
 [audio]
 
