@@ -225,7 +225,7 @@ theme_override_fonts/font = SubResource("FontVariation_o8r8j")
 theme_override_font_sizes/font_size = 16
 text = "Reset"
 
-[node name="Keybinds" type="Panel" parent="." node_paths=PackedStringArray("actionContainer", "btnReset")]
+[node name="Keybinds" type="Panel" parent="." node_paths=PackedStringArray("actionContainer", "btnReset", "btnKeybinds")]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -235,10 +235,10 @@ anchor_right = 0.972
 anchor_bottom = 0.979
 offset_left = -0.3
 offset_bottom = -0.0599976
-focus_neighbor_top = NodePath("../BtnKeybinds")
 script = ExtResource("8_jn8yc")
 actionContainer = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer")
 btnReset = NodePath("MarginContainer/VBoxContainer/BtnReset")
+btnKeybinds = NodePath("../BtnKeybinds")
 
 [node name="MarginContainer" type="MarginContainer" parent="Keybinds"]
 layout_mode = 1

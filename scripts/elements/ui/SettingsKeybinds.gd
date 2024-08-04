@@ -5,6 +5,8 @@ extends Control
 @export var actionContainer: VBoxContainer
 @export var btnReset: Button
 
+@export var btnKeybinds: Node
+
 var isRemapping: bool = false
 var actionToRemap: String = ""
 var remappingButton: Button = null
@@ -54,6 +56,10 @@ func createActionList() -> void:
 		
 		actionContainer.add_child(button)
 		button.pressed.connect(onKeybindButtonPressed.bind(button, action))
+		#button.focus_neighbor_top = button.get_path_to(btnKeybinds)
+	
+	# Oath is relative to button
+	actionContainer.get_child(0).focus_neighbor_top = actionContainer.get_child(0).get_path_to(btnKeybinds)
 
 func onKeybindButtonPressed(button: Button, action: String) -> void:
 	if !isRemapping:
