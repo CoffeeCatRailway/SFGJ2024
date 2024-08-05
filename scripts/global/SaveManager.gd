@@ -30,6 +30,10 @@ func saveKeybind(action: String, event: InputEvent) -> void:
 		SaveManager.saveResource.keyBinds[action] = OS.get_keycode_string(event.keycode)
 	elif event is InputEventMouseButton:
 		SaveManager.saveResource.keyBinds[action] = "mouse_" + str(event.button_index)
+	elif event is InputEventJoypadButton:
+		SaveManager.saveResource.keyBinds[action] = "joypad_button_" + str(event.button_index)
+	elif event is InputEventJoypadMotion:
+		SaveManager.saveResource.keyBinds[action] = "joypad_axis_" + str(event.axis) + "_" + str(signf(event.axis_value))
 	
 	save()
 
@@ -39,7 +43,15 @@ func loadKeybindings() -> Dictionary:
 		var event: InputEvent
 		var keyBind: String = saveResource.keyBinds[action]
 		
-		if keyBind.begins_with("mouse_"):
+		if keyBind.begins_with("joypad_axis_"):
+			event = InputEventJoypadMotion.new()
+			var axis: PackedFloat64Array = keyBind.trim_prefix("joypad_axis_").split_floats("_")
+			event.axis = int(axis[0])
+			event.axis_value = axis[1]
+		elif keyBind.begins_with("joypad_button_"):
+			event = InputEventJoypadButton.new()
+			event.button_index = int(keyBind.trim_prefix("joypad_button_"))
+		elif keyBind.begins_with("mouse_"):
 			event = InputEventMouseButton.new()
 			event.button_index = int(keyBind.trim_prefix("mouse_"))
 		else:

@@ -73,7 +73,9 @@ func _input(event: InputEvent) -> void:
 	if !isRemapping:
 		return
 	
-	if event is InputEventKey || (event is InputEventMouseButton && event.is_pressed()):# || event is InputEventJoypadButton:
+	var isMouseButton: bool = (event is InputEventMouseButton && event.is_pressed())
+	var isJoyAxis: bool = (event is InputEventJoypadMotion && absf(event.axis_value) > .5)
+	if event is InputEventKey || isMouseButton || event is InputEventJoypadButton || isJoyAxis:
 		if event is InputEventMouseButton && event.double_click:
 			event.double_click = false
 		
@@ -93,7 +95,7 @@ func trimActionName(action: String) -> String:
 	if !regex:
 		regex = RegEx.new()
 		regex.compile("^([^\\(]*)")
-	return regex.search(action).get_string()
+	return regex.search(action).get_string().trim_prefix("Joypad Motion on ")
 
 func onResetPressed() -> void:
 	loadKeyBindingsFromSave()
