@@ -40,6 +40,7 @@ func createActionList() -> void:
 	for child: Control in actionContainer.get_children():
 		child.queue_free()
 	
+	var prev: Node
 	for action: String in actionNames.keys():
 		var button: Button = keybindButtonScene.instantiate()
 		var labelName: Label = button.find_child("ActionName")
@@ -56,10 +57,13 @@ func createActionList() -> void:
 		
 		actionContainer.add_child(button)
 		button.pressed.connect(onKeybindButtonPressed.bind(button, action))
-		#button.focus_neighbor_top = button.get_path_to(btnKeybinds)
-	
-	# Oath is relative to button
-	actionContainer.get_child(0).focus_neighbor_top = actionContainer.get_child(0).get_path_to(btnKeybinds)
+		
+		# Path is relative to button
+		if !prev:
+			button.focus_neighbor_top = button.get_path_to(btnKeybinds)
+		else:
+			button.focus_neighbor_top = button.get_path_to(prev)
+		prev = button
 
 func onKeybindButtonPressed(button: Button, action: String) -> void:
 	if !isRemapping:
