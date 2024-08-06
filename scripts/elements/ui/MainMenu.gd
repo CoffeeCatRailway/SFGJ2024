@@ -14,10 +14,6 @@ var creditsToggle: bool = false
 
 @onready var settings: SettingsMenu = $CanvasLayer/SettingsMenu
 
-@onready var labelArt: RichTextLabel = $CanvasLayer/Credits/LabelArt
-@onready var labelSound: RichTextLabel = $CanvasLayer/Credits/LabelSound
-@onready var labelMusic: RichTextLabel = $CanvasLayer/Credits/LabelMusic
-
 func _ready() -> void:
 	PauseMenu.canPause = false
 	$CanvasLayer/VBoxContainer.visible = true
@@ -34,9 +30,9 @@ func _ready() -> void:
 	settings.btnClose.pressed.connect(onSettingsBackPressed)
 	btnPlay.grab_focus()
 	
-	labelArt.meta_clicked.connect(handleRichTextMetaClick)
-	labelSound.meta_clicked.connect(handleRichTextMetaClick)
-	labelMusic.meta_clicked.connect(handleRichTextMetaClick)
+	for label: Control in $CanvasLayer/Credits/ScrollContainer/VBoxContainer.get_children():
+		if label is RichTextLabel:
+			label.meta_clicked.connect(handleRichTextMetaClick)
 
 func playClickSound() -> void:
 	audioPlayer.stream = clickSound

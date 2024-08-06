@@ -96,6 +96,7 @@ bus = &"menu"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameTitle" type="Label" parent="CanvasLayer"]
+z_index = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -116,6 +117,7 @@ text = "SausageFest GameJam 2024"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -224,6 +226,7 @@ theme_override_font_sizes/font_size = 16
 text = "Version: 0.0.0.0"
 
 [node name="SettingsMenu" parent="CanvasLayer" node_paths=PackedStringArray("audioPlayer") instance=ExtResource("9_ah7ra")]
+visible = false
 z_index = 1
 audioPlayer = NodePath("../../AudioStreamPlayer")
 
@@ -235,95 +238,89 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("2_1jg5o")
 
 [node name="TileMap2" type="TileMap" parent="CanvasLayer/Credits"]
 tile_set = ExtResource("1_egso4")
 format = 2
-layer_0/tile_data = PackedInt32Array(589828, 0, 1, 589831, 131072, 1, 589830, 458752, 2, 589829, 458752, 2, 524295, 131072, 1, 524292, 0, 1, 524293, 458752, 2, 524294, 458752, 2, 589827, 131072, 3, 589832, 65536, 3, 655367, 131072, 1, 655364, 0, 1, 655363, 196608, 4, 655368, 131072, 4, 655366, 458752, 2, 655365, 65536, 1, 720901, 458752, 2, 720902, 458752, 2, 720900, 655360, 1, 720903, 589824, 1, 393222, 65536, 1)
+layer_0/tile_data = PackedInt32Array(589830, 458752, 2, 589829, 458752, 2, 524293, 458752, 2, 524294, 458752, 2, 655366, 458752, 2, 655365, 65536, 1, 720901, 458752, 2, 720902, 458752, 2, 393222, 65536, 1, 720904, 589824, 1, 720900, 655360, 1, 655364, 0, 1, 589828, 0, 1, 524292, 0, 1, 589827, 131072, 3, 655363, 196608, 4, 655368, 131072, 1, 589832, 131072, 1, 524296, 131072, 1, 458760, 131072, 1, 393224, 131072, 1, 327688, 131072, 1, 262152, 131072, 1, 196616, 131072, 0, 196615, 65536, 0, 720903, 458752, 2, 655367, 458752, 2, 589831, 458752, 2, 524295, 458752, 2, 458759, 458752, 2, 393223, 458752, 2, 327687, 458752, 2, 262151, 458752, 2, 131080, 196608, 3, 589833, 65536, 3, 524297, 65536, 3, 458761, 65536, 3, 393225, 65536, 3, 327689, 65536, 3, 262153, 65536, 3, 196617, 65536, 3, 655369, 131072, 4, 458762, 327680, 4, 393226, 262144, 4, 327690, 327680, 4, 524299, 262144, 4, 262155, 524288, 1)
 
 [node name="LabelCredits" type="Label" parent="CanvasLayer/Credits"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -42.0
-offset_right = 19.0
-offset_bottom = -28.0
+layout_mode = 2
+anchor_left = 0.401
+anchor_top = 0.281
+anchor_right = 0.604
+anchor_bottom = 0.354
+offset_left = -8.992
+offset_top = 0.0479965
+offset_right = 24.032
+offset_bottom = 0.0319977
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_jnjeq")
+theme_override_font_sizes/font_size = 16
 text = "Credits"
 horizontal_alignment = 1
 
-[node name="LabelGame" type="Label" parent="CanvasLayer/Credits"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Credits"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -28.0
-offset_right = 20.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/line_spacing = -5
-theme_override_fonts/font = ExtResource("7_au7ui")
-text = "Game by:
-CoffeeCat"
-horizontal_alignment = 1
+anchors_preset = -1
+anchor_left = 0.354
+anchor_top = 0.349
+anchor_right = 0.703
+anchor_bottom = 0.911
+offset_left = 0.0319977
+offset_top = -0.00800323
+offset_right = 5.024
+offset_bottom = 2.08798
+horizontal_scroll_mode = 0
 
-[node name="LabelArt" type="RichTextLabel" parent="CanvasLayer/Credits"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -1.0
-offset_right = 20.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("7_au7ui")
-bbcode_enabled = true
-text = "[center][url=\"https://cosephgames.itch.io/asset-sci-fi-doors\"]Art: Seph[/url]"
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Credits/ScrollContainer"]
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="LabelSound" type="RichTextLabel" parent="CanvasLayer/Credits"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = 15.0
-offset_right = 27.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="LabelGame" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center][url=\"https://yourpalrob.itch.io/classic-arcade-sound-effects\"]Sound: YourPalRob[/url]"
+text = "[center]Game: [color=#4d7a24][url=\"https://discord.gg/ueCBEZjVcB\"]CoffeeCat[/url][/color]"
+fit_content = true
+scroll_active = false
 
-[node name="LabelMusic" type="RichTextLabel" parent="CanvasLayer/Credits"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = 47.0
-offset_right = 27.0
-offset_bottom = 76.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="LabelArt" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center][url=\"https://kronbits.itch.io/freesfx\"]Music: Kronbits[/url]"
+text = "[center]Art: [color=#4d7a24][url=\"https://cosephgames.itch.io/asset-sci-fi-doors\"]Seph[/url][/color] & [color=#4d7a24][url=\"https://thetra00.itch.io/scifi-dungeontileset-thretra00\"]Thetra00[/url][/color]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelFont" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Font: [color=#4d7a24][url=\"https://lana-ro.itch.io/sra-free-pixel-font-pack\"]Lana Ro[/url][/color]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelSound" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Sound: [color=#4d7a24][url=\"https://yourpalrob.itch.io/classic-arcade-sound-effects\"]YourPalRob[/url][/color]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelMusic" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Music: [color=#4d7a24][url=\"https://kronbits.itch.io/freesfx\"]Kronbits[/url][/color]"
+fit_content = true
+scroll_active = false
