@@ -14,8 +14,12 @@ extends Panel
 func _ready() -> void:
 	#btnClose.grab_focus()
 	
+	btnClose.pressed.connect(onClosePressed)
 	btnAudio.pressed.connect(onAudioPressed)
 	btnKeybinds.pressed.connect(onKeybindsPressed)
+
+func onClosePressed() -> void:
+	SaveManager.save()
 
 func onAudioPressed() -> void:
 	btnAudio.disabled = true
