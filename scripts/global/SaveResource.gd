@@ -18,3 +18,10 @@ extends Resource
 	"fire": "mouse_1",
 	"pause": "Escape",
 }
+
+# Default system values
+func _init() -> void:
+	masterVolume = db_to_linear(AudioServer.get_bus_volume_db(0))
+	effectsVolume = db_to_linear(AudioServer.get_bus_volume_db(1))
+	musicVolume = db_to_linear(AudioServer.get_bus_volume_db(2))
+	menuVolume = db_to_linear(AudioServer.get_bus_volume_db(3))

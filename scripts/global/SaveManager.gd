@@ -7,6 +7,8 @@ var newSave: bool = false
 func _enter_tree() -> void:
 	if ResourceLoader.exists(SAVE_PATH):
 		var loaded: Variant = ResourceLoader.load(SAVE_PATH)
+		if !loaded:
+			loaded = SaveResource.new()
 		assert(loaded is SaveResource)
 		saveResource = loaded as SaveResource
 	else:
@@ -20,6 +22,8 @@ func save() -> void:
 	var result: Error = ResourceSaver.save(saveResource, SAVE_PATH)
 	if result != OK:
 		printerr("Save failed!")
+	else:
+		print("Saved!")
 
 func saveKeybind(action: String, event: InputEvent) -> void:
 	if !saveResource.keyBinds.has(action):
@@ -27,13 +31,13 @@ func saveKeybind(action: String, event: InputEvent) -> void:
 		return
 	
 	if event is InputEventKey:
-		SaveManager.saveResource.keyBinds[action] = OS.get_keycode_string(event.keycode)
+		saveResource.keyBinds[action] = OS.get_keycode_string(event.keycode)
 	elif event is InputEventMouseButton:
-		SaveManager.saveResource.keyBinds[action] = "mouse_" + str(event.button_index)
+		saveResource.keyBinds[action] = "mouse_" + str(event.button_index)
 	elif event is InputEventJoypadButton:
-		SaveManager.saveResource.keyBinds[action] = "joypad_button_" + str(event.button_index)
+		saveResource.keyBinds[action] = "joypad_button_" + str(event.button_index)
 	elif event is InputEventJoypadMotion:
-		SaveManager.saveResource.keyBinds[action] = "joypad_axis_" + str(event.axis) + "_" + str(signf(event.axis_value))
+		saveResource.keyBinds[action] = "joypad_axis_" + str(event.axis) + "_" + str(signf(event.axis_value))
 	
 	save()
 

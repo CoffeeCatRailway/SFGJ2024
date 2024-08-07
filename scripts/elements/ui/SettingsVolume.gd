@@ -12,6 +12,7 @@ func _ready() -> void:
 	
 	#call_deferred("setVolumeSliders")
 	setVolumeSliders()
+	setVolumes()
 
 func onResetPressed() -> void:
 	var tempSave: SaveResource = SaveResource.new()
@@ -21,17 +22,17 @@ func onResetPressed() -> void:
 	menuVolume.value = tempSave.menuVolume
 
 func setVolumeSliders() -> void:
-	if SaveManager.newSave:
-		masterVolume.value = db_to_linear(AudioServer.get_bus_volume_db(0))
-		effectsVolume.value = db_to_linear(AudioServer.get_bus_volume_db(1))
-		musicVolume.value = db_to_linear(AudioServer.get_bus_volume_db(2))
-		menuVolume.value = db_to_linear(AudioServer.get_bus_volume_db(3))
-	else:
-		masterVolume.value = SaveManager.saveResource.masterVolume
-		effectsVolume.value = SaveManager.saveResource.effectsVolume
-		musicVolume.value = SaveManager.saveResource.musicVolume
-		menuVolume.value = SaveManager.saveResource.menuVolume
-	setVolumes()
+	#if SaveManager.newSave:
+		#masterVolume.value = db_to_linear(AudioServer.get_bus_volume_db(0))
+		#effectsVolume.value = db_to_linear(AudioServer.get_bus_volume_db(1))
+		#musicVolume.value = db_to_linear(AudioServer.get_bus_volume_db(2))
+		#menuVolume.value = db_to_linear(AudioServer.get_bus_volume_db(3))
+	#else:
+	masterVolume.value = SaveManager.saveResource.masterVolume
+	effectsVolume.value = SaveManager.saveResource.effectsVolume
+	musicVolume.value = SaveManager.saveResource.musicVolume
+	menuVolume.value = SaveManager.saveResource.menuVolume
+	#setVolumes()
 
 func setVolumes() -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(masterVolume.value))
