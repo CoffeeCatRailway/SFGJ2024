@@ -20,10 +20,11 @@ func stop(gameWon: bool) -> int:
 	var time: int = Time.get_ticks_msec() - startTime
 	
 	if gameWon:
-		if kills > SaveManager.saveResource.bestKills:
-			SaveManager.saveResource.bestKills = kills
-		if time < SaveManager.saveResource.bestTime:
-			SaveManager.saveResource.bestTime = time
+		if kills > SaveManager.loadStatKills():
+			SaveManager.saveStatKills(kills)
+		var bestTime: int = SaveManager.loadStatTime()
+		if time < bestTime || bestTime == -1:
+			SaveManager.saveStatTime(time)
 	
 	return time
 
