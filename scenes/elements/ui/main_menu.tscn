@@ -222,7 +222,7 @@ grow_vertical = 0
 theme = ExtResource("2_1jg5o")
 theme_override_colors/font_color = Color(0.113725, 0.156863, 0.188235, 1)
 theme_override_font_sizes/font_size = 16
-text = "Version: 0.0.0.0"
+text = "Version: 0.0.0"
 
 [node name="SettingsMenu" parent="CanvasLayer" node_paths=PackedStringArray("audioPlayer") instance=ExtResource("9_ah7ra")]
 visible = false
