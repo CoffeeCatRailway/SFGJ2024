@@ -68,16 +68,16 @@ func saveStatKills(kills: int) -> void:
 	save()
 
 func loadStatKills(useDefault: bool = false) -> int:
-	var configFile: ConfigFile = configFileDefault if useDefault else self.configFile
-	return int(configFile.get_value("stats", "kills", 0))
+	var _configFile: ConfigFile = configFileDefault if useDefault else configFile
+	return int(_configFile.get_value("stats", "kills", 0))
 
 func saveStatTime(time: int) -> void:
 	configFile.set_value("stats", "time", time)
 	save()
 
 func loadStatTime(useDefault: bool = false) -> int:
-	var configFile: ConfigFile = configFileDefault if useDefault else self.configFile
-	return int(configFile.get_value("stats", "time", -1))
+	var _configFile: ConfigFile = configFileDefault if useDefault else configFile
+	return int(_configFile.get_value("stats", "time", -1))
 
 func saveVolume(busName: String, volume: float) -> void:
 	if !AUDIO_BUS_NAMES.has(busName):
@@ -92,8 +92,8 @@ func loadVolume(busName: String, useDefault: bool = false) -> float:
 		printerr("Audio bus '%s' does not exist!" % busName)
 		return -1.
 	
-	var configFile: ConfigFile = configFileDefault if useDefault else self.configFile
-	return float(configFile.get_value("volume", busName, 1.))
+	var _configFile: ConfigFile = configFileDefault if useDefault else configFile
+	return float(_configFile.get_value("volume", busName, 1.))
 
 func getKeybindFromEvent(event: InputEvent) -> String:
 	if event is InputEventKey:
@@ -118,11 +118,11 @@ func saveKeybind(action: String, event: InputEvent) -> void:
 	save()
 #
 func loadKeybindings(useDefault: bool = false) -> Dictionary:
-	var configFile: ConfigFile = configFileDefault if useDefault else self.configFile
+	var _configFile: ConfigFile = configFileDefault if useDefault else configFile
 	var keybindings: Dictionary = {}
-	for action: String in configFile.get_section_keys("keybinds"):
+	for action: String in _configFile.get_section_keys("keybinds"):
 		var event: InputEvent
-		var keybind: String = configFile.get_value("keybinds", action, "")
+		var keybind: String = _configFile.get_value("keybinds", action, "")
 		
 		if keybind.begins_with("joypad_axis_"):
 			event = InputEventJoypadMotion.new()
