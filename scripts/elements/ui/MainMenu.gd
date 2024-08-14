@@ -52,6 +52,8 @@ func showSettings(_show: bool) -> void:
 # Main Menu
 func onPlayPressed() -> void:
 	playClickSound()
+	#SceneTransition.transition()
+	#await SceneTransition.onTransitionFinish
 	get_tree().change_scene_to_packed(levelScene)
 
 func onSettingsPressed() -> void:

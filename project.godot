@@ -29,6 +29,7 @@ PauseMenu="*res://scenes/elements/ui/pause_menu.tscn"
 EndGameMenu="*res://scenes/elements/ui/end_game_menu.tscn"
 StatTracker="*res://scripts/global/StatTracker.gd"
 SaveManager="*res://scripts/global/SaveManager.gd"
+SceneTransition="*res://scenes/global/scene_transition.tscn"
 
 [debug]
 
