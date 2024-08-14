@@ -24,7 +24,11 @@ func update(_delta: float) -> State:
 	return null
 
 func getLookTarget() -> Vector2:
-	return parent.get_global_mouse_position()
+	if Input.get_last_mouse_velocity().length() > 0. || Input.get_connected_joypads().is_empty():
+		return parent.get_global_mouse_position()
+	else:
+		var lookVec: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down").limit_length()
+		return sprite.global_position + lookVec
 
 func shouldFire() -> bool:
 	return timer.is_stopped() && Input.is_action_pressed("fire")

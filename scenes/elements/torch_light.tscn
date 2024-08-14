@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b26ummy7l0tq3"]
+
+[ext_resource type="Texture2D" uid="uid://bk25tgmn55joo" path="res://assets/textures/spotlight.png" id="1_si8wk"]
+
+[node name="TorchLight" type="PointLight2D"]
+rotation = -1.5708
+scale = Vector2(1.25, 1.875)
+color = Color(0.694118, 0.384314, 0.0941176, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("1_si8wk")
+offset = Vector2(0, 16)
+texture_scale = 0.5
+height = 100.0

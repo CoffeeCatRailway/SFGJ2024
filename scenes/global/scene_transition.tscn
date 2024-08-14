@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=3 uid="uid://f0g8qcf5tneo"]
+
+[ext_resource type="Texture2D" uid="uid://c5nhajliqieg1" path="res://assets/textures/transition.png" id="1_f80u7"]
+[ext_resource type="Script" path="res://scripts/global/SceneTransition.gd" id="1_rpwk8"]
+[ext_resource type="Texture2D" uid="uid://ckvepejq05fo5" path="res://assets/textures/transition-door.png" id="2_y3emb"]
+
+[sub_resource type="Animation" id="Animation_58cf2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteDoorLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(65, 102.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteDoorRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(127, 102.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_upscv"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteDoorLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 102.5), Vector2(65, 102.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteDoorRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(189, 102.5), Vector2(127, 102.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6iuiv"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteDoorLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(65, 102.5), Vector2(3, 102.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteDoorRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(127, 102.5), Vector2(189, 102.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kff1"]
+_data = {
+"RESET": SubResource("Animation_58cf2"),
+"close": SubResource("Animation_upscv"),
+"open": SubResource("Animation_6iuiv")
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 50
+script = ExtResource("1_rpwk8")
+
+[node name="Node2D" type="Node2D" parent="."]
+z_index = 50
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+z_index = 1
+position = Vector2(96, 96)
+texture = ExtResource("1_f80u7")
+
+[node name="SpriteDoorLeft" type="Sprite2D" parent="Node2D"]
+position = Vector2(65, 102.5)
+texture = ExtResource("2_y3emb")
+region_enabled = true
+region_rect = Rect2(0, 0, 62, 79)
+
+[node name="SpriteDoorRight" type="Sprite2D" parent="Node2D"]
+position = Vector2(127, 102.5)
+texture = ExtResource("2_y3emb")
+region_enabled = true
+region_rect = Rect2(62, 0, 62, 79)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Node2D")
+libraries = {
+"": SubResource("AnimationLibrary_2kff1")
+}

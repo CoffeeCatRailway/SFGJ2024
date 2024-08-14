@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6rvsrtaqke3o"]
+[gd_scene load_steps=20 format=3 uid="uid://c6rvsrtaqke3o"]
 
 [ext_resource type="TileSet" uid="uid://dd7enrass2b7r" path="res://assets/tile_set.tres" id="1_egso4"]
 [ext_resource type="Script" path="res://scripts/elements/ui/MainMenu.gd" id="1_noswe"]
@@ -9,9 +9,23 @@
 [ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="5_qkvm4"]
 [ext_resource type="FontFile" uid="uid://ch25psfamik74" path="res://assets/fonts/PixelSmall.ttf" id="7_au7ui"]
 [ext_resource type="FontFile" uid="uid://bus73bjwrn87v" path="res://assets/fonts/PixelMiddle.ttf" id="8_jnjeq"]
+[ext_resource type="PackedScene" uid="uid://csy4j3w07828q" path="res://scenes/elements/ui/settings_menu.tscn" id="9_ah7ra"]
 
-[sub_resource type="Animation" id="Animation_s2kvj"]
+[sub_resource type="FontVariation" id="FontVariation_7iaal"]
+base_font = ExtResource("7_au7ui")
+spacing_glyph = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g7ocr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhbo6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iouhb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hyxji"]
+
+[sub_resource type="Animation" id="Animation_ilt2j"]
 length = 0.001
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -25,7 +39,7 @@ tracks/0/keys = {
 "values": [Vector2i(3, 9)]
 }
 
-[sub_resource type="Animation" id="Animation_ivlme"]
+[sub_resource type="Animation" id="Animation_oicg5"]
 resource_name = "hover"
 length = 0.3
 loop_mode = 1
@@ -42,7 +56,7 @@ tracks/0/keys = {
 "values": [Vector2i(3, 9), Vector2i(3, 8), Vector2i(3, 7)]
 }
 
-[sub_resource type="Animation" id="Animation_6mmwe"]
+[sub_resource type="Animation" id="Animation_4wg8f"]
 resource_name = "idle"
 length = 0.2
 loop_mode = 1
@@ -59,11 +73,11 @@ tracks/0/keys = {
 "values": [Vector2i(3, 9), Vector2i(3, 8)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bshpa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2fu7q"]
 _data = {
-"RESET": SubResource("Animation_s2kvj"),
-"hover": SubResource("Animation_ivlme"),
-"idle": SubResource("Animation_6mmwe")
+"RESET": SubResource("Animation_ilt2j"),
+"hover": SubResource("Animation_oicg5"),
+"idle": SubResource("Animation_4wg8f")
 }
 
 [node name="MainMenu" type="Node2D"]
@@ -79,9 +93,10 @@ layer_1/tile_data = PackedInt32Array(1, 393216, 4, 9, 327680, 5, 3, 262144, 1, 5
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"menu"
 
-[node name="CanvasCommon" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GameTitle" type="Label" parent="CanvasCommon"]
+[node name="GameTitle" type="Label" parent="CanvasLayer"]
+z_index = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -101,7 +116,48 @@ theme_override_font_sizes/font_size = 16
 text = "SausageFest GameJam 2024"
 horizontal_alignment = 1
 
-[node name="BtnCredits" type="TextureButton" parent="CanvasCommon" node_paths=PackedStringArray("mainMenu")]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -37.0
+offset_right = 26.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1jg5o")
+
+[node name="BtnPlay" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../BtnSettings")
+focus_next = NodePath("../BtnSettings")
+focus_previous = NodePath("../../BtnCredits")
+theme_override_fonts/font = SubResource("FontVariation_7iaal")
+theme_override_font_sizes/font_size = 16
+text = "Play"
+
+[node name="BtnSettings" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../BtnPlay")
+focus_neighbor_bottom = NodePath("../BtnQuit")
+focus_next = NodePath("../BtnQuit")
+focus_previous = NodePath("../BtnPlay")
+theme_override_font_sizes/font_size = 16
+text = "Settings"
+
+[node name="BtnQuit" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../BtnSettings")
+focus_neighbor_bottom = NodePath("../../BtnCredits")
+focus_next = NodePath("../../BtnCredits")
+focus_previous = NodePath("../BtnSettings")
+theme_override_font_sizes/font_size = 16
+text = "Quit"
+
+[node name="BtnCredits" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("mainMenu")]
 custom_minimum_size = Vector2(32, 27)
 anchors_preset = 2
 anchor_top = 1.0
@@ -111,22 +167,31 @@ offset_top = -62.0
 offset_right = 44.0
 offset_bottom = -35.0
 grow_vertical = 0
+focus_neighbor_top = NodePath("../VBoxContainer/BtnQuit")
+focus_next = NodePath("../VBoxContainer/BtnPlay")
+focus_previous = NodePath("../VBoxContainer/BtnQuit")
+theme = ExtResource("2_1jg5o")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g7ocr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nhbo6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iouhb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hyxji")
 script = ExtResource("5_gtsbp")
 mainMenu = NodePath("../..")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasCommon/BtnCredits"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/BtnCredits"]
 position = Vector2(16, 8)
 texture = ExtResource("5_qkvm4")
 hframes = 32
 vframes = 16
 frame = 291
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasCommon/BtnCredits"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/BtnCredits"]
 libraries = {
-"": SubResource("AnimationLibrary_bshpa")
+"": SubResource("AnimationLibrary_2fu7q")
 }
+autoplay = "idle"
 
-[node name="Label" type="Label" parent="CanvasCommon/BtnCredits"]
+[node name="Label" type="Label" parent="CanvasLayer/BtnCredits"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -144,117 +209,118 @@ theme_override_font_sizes/font_size = 16
 text = "Credits"
 horizontal_alignment = 1
 
-[node name="CanvasMain" type="CanvasLayer" parent="."]
+[node name="Version" type="Label" parent="CanvasLayer"]
+z_index = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -12.0
+offset_right = 42.0
+offset_bottom = 2.0
+grow_vertical = 0
+theme = ExtResource("2_1jg5o")
+theme_override_colors/font_color = Color(0.113725, 0.156863, 0.188235, 1)
+theme_override_font_sizes/font_size = 16
+text = "Version: 0.0.0"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasMain"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -39.0
-offset_right = 25.0
-offset_bottom = 31.0
+[node name="SettingsMenu" parent="CanvasLayer" node_paths=PackedStringArray("audioPlayer") instance=ExtResource("9_ah7ra")]
+visible = false
+z_index = 1
+audioPlayer = NodePath("../../AudioStreamPlayer")
+
+[node name="Credits" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("2_1jg5o")
 
-[node name="BtnPlay" type="Button" parent="CanvasMain/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_1jg5o")
-text = "Play"
-
-[node name="BtnQuit" type="Button" parent="CanvasMain/VBoxContainer"]
-layout_mode = 2
-text = "Quit"
-
-[node name="CanvasCredits" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="TileMap2" type="TileMap" parent="CanvasCredits"]
+[node name="TileMap2" type="TileMap" parent="CanvasLayer/Credits"]
 tile_set = ExtResource("1_egso4")
 format = 2
-layer_0/tile_data = PackedInt32Array(589828, 0, 1, 589831, 131072, 1, 589830, 458752, 2, 589829, 458752, 2, 524295, 131072, 1, 524292, 0, 1, 524293, 458752, 2, 524294, 458752, 2, 589827, 131072, 3, 589832, 65536, 3, 655367, 131072, 1, 655364, 0, 1, 655363, 196608, 4, 655368, 131072, 4, 655366, 458752, 2, 655365, 65536, 1, 720901, 458752, 2, 720902, 458752, 2, 720900, 655360, 1, 720903, 589824, 1, 393222, 65536, 1)
+layer_0/tile_data = PackedInt32Array(589830, 458752, 2, 589829, 458752, 2, 524293, 458752, 2, 524294, 458752, 2, 655366, 458752, 2, 655365, 65536, 1, 720901, 458752, 2, 720902, 458752, 2, 393222, 65536, 1, 720904, 589824, 1, 720900, 655360, 1, 655364, 0, 1, 589828, 0, 1, 524292, 0, 1, 589827, 131072, 3, 655363, 196608, 4, 655368, 131072, 1, 589832, 131072, 1, 524296, 131072, 1, 458760, 131072, 1, 393224, 131072, 1, 327688, 131072, 1, 262152, 131072, 1, 196616, 131072, 0, 196615, 65536, 0, 720903, 458752, 2, 655367, 458752, 2, 589831, 458752, 2, 524295, 458752, 2, 458759, 458752, 2, 393223, 458752, 2, 327687, 458752, 2, 262151, 458752, 2, 131080, 196608, 3, 589833, 65536, 3, 524297, 65536, 3, 458761, 65536, 3, 393225, 65536, 3, 327689, 65536, 3, 262153, 65536, 3, 196617, 65536, 3, 655369, 131072, 4, 458762, 327680, 4, 393226, 262144, 4, 327690, 327680, 4, 524299, 262144, 4, 262155, 524288, 1)
 
-[node name="LabelCredits" type="Label" parent="CanvasCredits"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -42.0
-offset_right = 19.0
-offset_bottom = -28.0
+[node name="LabelCredits" type="Label" parent="CanvasLayer/Credits"]
+layout_mode = 2
+anchor_left = 0.401
+anchor_top = 0.281
+anchor_right = 0.604
+anchor_bottom = 0.354
+offset_left = -8.992
+offset_top = 0.0479965
+offset_right = 24.032
+offset_bottom = 0.0319977
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_jnjeq")
+theme_override_font_sizes/font_size = 16
 text = "Credits"
 horizontal_alignment = 1
 
-[node name="LabelGame" type="Label" parent="CanvasCredits"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -28.0
-offset_right = 20.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/line_spacing = -5
-theme_override_fonts/font = ExtResource("7_au7ui")
-text = "Game by:
-CoffeeCat"
-horizontal_alignment = 1
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Credits"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.354
+anchor_top = 0.349
+anchor_right = 0.703
+anchor_bottom = 0.911
+offset_left = 0.0319977
+offset_top = -0.00800323
+offset_right = 5.024
+offset_bottom = 2.08798
+horizontal_scroll_mode = 0
 
-[node name="LabelArt" type="RichTextLabel" parent="CanvasCredits"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -1.0
-offset_right = 20.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("7_au7ui")
-bbcode_enabled = true
-text = "[center][url=\"https://cosephgames.itch.io/asset-sci-fi-doors\"]Art: Seph[/url]"
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Credits/ScrollContainer"]
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="LabelSound" type="RichTextLabel" parent="CanvasCredits"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = 15.0
-offset_right = 27.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="LabelGame" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center][url=\"https://yourpalrob.itch.io/classic-arcade-sound-effects\"]Sound: YourPalRob[/url]"
+text = "[center]Game: [color=#4d7a24][url=\"https://discord.gg/ueCBEZjVcB\"]CoffeeCat[/url][/color]"
+fit_content = true
+scroll_active = false
 
-[node name="LabelMusic" type="RichTextLabel" parent="CanvasCredits"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = 47.0
-offset_right = 27.0
-offset_bottom = 76.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="LabelArt" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center][url=\"https://kronbits.itch.io/freesfx\"]Music: Kronbits[/url]"
+text = "[center]Art: [color=#4d7a24][url=\"https://cosephgames.itch.io/asset-sci-fi-doors\"]Seph[/url][/color] & [color=#4d7a24][url=\"https://thetra00.itch.io/scifi-dungeontileset-thretra00\"]Thetra00[/url][/color]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelFont" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Font: [color=#4d7a24][url=\"https://lana-ro.itch.io/sra-free-pixel-font-pack\"]Lana Ro[/url][/color]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelSound" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Sound: [color=#4d7a24][url=\"https://yourpalrob.itch.io/classic-arcade-sound-effects\"]YourPalRob[/url][/color]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelMusic" type="RichTextLabel" parent="CanvasLayer/Credits/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("7_au7ui")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Music: [color=#4d7a24][url=\"https://kronbits.itch.io/freesfx\"]Kronbits[/url][/color]"
+fit_content = true
+scroll_active = false

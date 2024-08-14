@@ -1,8 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://6tngy8wpq26g"]
+[gd_scene load_steps=21 format=3 uid="uid://6tngy8wpq26g"]
 
 [ext_resource type="Texture2D" uid="uid://dgtoquyukgi7s" path="res://assets/textures/scifi-dungeon-doors.png" id="1_k262x"]
 [ext_resource type="Script" path="res://scripts/elements/Door.gd" id="2_gwrxh"]
+[ext_resource type="Texture2D" uid="uid://u556ujokkfol" path="res://assets/textures/normal_door.png" id="2_qos26"]
 [ext_resource type="AudioStream" uid="uid://cha14ftr4u15d" path="res://assets/sounds/Booster_static_2-edited.wav" id="3_wauxy"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_554xt"]
+diffuse_texture = ExtResource("1_k262x")
+normal_texture = ExtResource("2_qos26")
 
 [sub_resource type="Animation" id="Animation_u8imb"]
 length = 0.001
@@ -29,6 +34,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LightOccluder2D:occluder:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-16, -8, 0, -8, 0, 8, -16, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LightOccluder2D2:occluder:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(16, -8, 0, -8, 0, 8, 16, 8)]
 }
 
 [sub_resource type="Animation" id="Animation_m3a2v"]
@@ -58,6 +87,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LightOccluder2D:occluder:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-16, -8, -12, -8, -12, 8, -16, 8), PackedVector2Array(-16, -8, -8, -8, -8, 8, -16, 8), PackedVector2Array(-16, -8, -4, -8, -4, 8, -16, 8), PackedVector2Array(-16, -8, 0, -8, 0, 8, -16, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LightOccluder2D2:occluder:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(16, -8, 12, -8, 12, 8, 16, 8), PackedVector2Array(16, -8, 8, -8, 8, 8, 16, 8), PackedVector2Array(16, -8, 4, -8, 4, 8, 16, 8), PackedVector2Array(16, -8, 0, -8, 0, 8, 16, 8)]
+}
 
 [sub_resource type="Animation" id="Animation_81aqt"]
 resource_name = "open"
@@ -86,6 +139,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LightOccluder2D:occluder:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-16, -8, 0, -8, 0, 8, -16, 8), PackedVector2Array(-16, -8, -4, -8, -4, 8, -16, 8), PackedVector2Array(-16, -8, -8, -8, -8, 8, -16, 8), PackedVector2Array(-16, -8, -12, -8, -12, 8, -16, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LightOccluder2D2:occluder:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(16, -8, 0, -8, 0, 8, 16, 8), PackedVector2Array(16, -8, 4, -8, 4, 8, 16, 8), PackedVector2Array(16, -8, 8, -8, 8, 8, 16, 8), PackedVector2Array(16, -8, 12, -8, 12, 8, 16, 8)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6koyg"]
 _data = {
@@ -99,6 +176,10 @@ size = Vector2(28, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27qsn"]
 size = Vector2(32, 16)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xvygm"]
+diffuse_texture = ExtResource("1_k262x")
+normal_texture = ExtResource("2_qos26")
 
 [sub_resource type="Animation" id="Animation_txmug"]
 resource_name = "RESET"
@@ -249,9 +330,15 @@ _data = {
 "unlockPurple": SubResource("Animation_m187x")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r4f4j"]
+polygon = PackedVector2Array(-16, -8, 0, -8, 0, 8, -16, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_23rx7"]
+polygon = PackedVector2Array(16, -8, 0, -8, 0, 8, 16, 8)
+
 [node name="Door" type="Sprite2D"]
 y_sort_enabled = true
-texture = ExtResource("1_k262x")
+texture = SubResource("CanvasTexture_554xt")
 hframes = 6
 vframes = 6
 frame = 18
@@ -275,7 +362,7 @@ shape = SubResource("RectangleShape2D_nnkdw")
 shape = SubResource("RectangleShape2D_27qsn")
 
 [node name="Lock" type="Sprite2D" parent="."]
-texture = ExtResource("1_k262x")
+texture = SubResource("CanvasTexture_xvygm")
 hframes = 6
 vframes = 6
 frame = 24
@@ -288,3 +375,9 @@ libraries = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_wauxy")
 bus = &"sfx"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_r4f4j")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_23rx7")

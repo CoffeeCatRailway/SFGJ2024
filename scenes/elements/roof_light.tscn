@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7m4au6jc27y"]
+
+[ext_resource type="Texture2D" uid="uid://bbspqlmsregp5" path="res://assets/textures/light_gradient.tres" id="1_7vgeo"]
+[ext_resource type="Script" path="res://scripts/elements/RoofLight.gd" id="2_dqxad"]
+[ext_resource type="Texture2D" uid="uid://d3886m6pjn8mu" path="res://assets/textures/SciFi_DungeonTileset16x16_0x72Like.png" id="3_qtw8k"]
+[ext_resource type="Texture2D" uid="uid://c086ekegeyil" path="res://assets/textures/normal.png" id="4_sabbh"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_132ns"]
+diffuse_texture = ExtResource("3_qtw8k")
+normal_texture = ExtResource("4_sabbh")
+
+[node name="RoofLight" type="PointLight2D"]
+color = Color(0.694118, 0.141176, 0.0941176, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("1_7vgeo")
+offset = Vector2(0, 27)
+height = 8.0
+script = ExtResource("2_dqxad")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+texture = SubResource("CanvasTexture_132ns")
+region_enabled = true
+region_rect = Rect2(352, 32, 16, 16)
