@@ -286,6 +286,13 @@ shape = SubResource("RectangleShape2D_mjbil")
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="RoofLight" parent="Lights" instance=ExtResource("16_nt754")]
+visible = false
+position = Vector2(96, 38.3438)
+scale = Vector2(1.6875, 1.63542)
+energy = 1.0
+shadow_item_cull_mask = 0
+
+[node name="RoofLight8" parent="Lights" instance=ExtResource("16_nt754")]
 position = Vector2(96, 38.3438)
 scale = Vector2(1.6875, 1.63542)
 
